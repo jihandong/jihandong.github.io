@@ -7,13 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="原因  我将虚拟机设置为efi启动方式，在正常地配置完引导分区、根分区后，所做的操作也都是正常的；可是关闭虚拟机再次启动后，发现系统再次进入了安装盘archiso；在调整启动顺序，拔出安装盘后，系统直接无法启动了；并且出现了shell界面，这表示引导出现了严重的问题。  但是我确认我的安装没有出现问题。  最终我确认了，是virtualbox本身的efi支持功能出现了问题——引导文件的位置和名字命">
+<meta name="keywords" content="archlinux,虚拟机,efi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="virtualbox虚拟机安装archlinux后无法正常开机！？">
 <meta property="og:url" content="http://yoursite.com/2019/05/29/archlinux虚拟机大坑/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
 <meta property="og:description" content="原因  我将虚拟机设置为efi启动方式，在正常地配置完引导分区、根分区后，所做的操作也都是正常的；可是关闭虚拟机再次启动后，发现系统再次进入了安装盘archiso；在调整启动顺序，拔出安装盘后，系统直接无法启动了；并且出现了shell界面，这表示引导出现了严重的问题。  但是我确认我的安装没有出现问题。  最终我确认了，是virtualbox本身的efi支持功能出现了问题——引导文件的位置和名字命">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-05-28T19:41:27.010Z">
+<meta property="og:updated_time" content="2019-05-28T19:50:28.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="virtualbox虚拟机安装archlinux后无法正常开机！？">
 <meta name="twitter:description" content="原因  我将虚拟机设置为efi启动方式，在正常地配置完引导分区、根分区后，所做的操作也都是正常的；可是关闭虚拟机再次启动后，发现系统再次进入了安装盘archiso；在调整启动顺序，拔出安装盘后，系统直接无法启动了；并且出现了shell界面，这表示引导出现了严重的问题。  但是我确认我的安装没有出现问题。  最终我确认了，是virtualbox本身的efi支持功能出现了问题——引导文件的位置和名字命">
@@ -58,13 +59,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Inicio</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">Acerca de</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Articulos</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Proyectos</a></li>
         
       </ul>
     </span>
@@ -79,8 +80,8 @@
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
       <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-next" class="info" style="display:none;">Post Siguiente</span>
+      <span id="i-top" class="info" style="display:none;">Arriba</span>
       <span id="i-share" class="info" style="display:none;">Compartir Post</span>
     </span>
     <br>
@@ -133,6 +134,11 @@
       
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/archlinux/">archlinux</a>, <a class="tag-link" href="/tags/efi/">efi</a>, <a class="tag-link" href="/tags/虚拟机/">虚拟机</a>
+    </div>
+
 
     </div>
   </header>
@@ -164,13 +170,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Inicio</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">Acerca de</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Articulos</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Proyectos</a></li>
         
       </ul>
     </div>
@@ -196,10 +202,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
         <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
 
   </div>
@@ -214,13 +220,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Inicio</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">Acerca de</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Articulos</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Proyectos</a></li>
         
       </ul>
     </nav>
