@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="初始环境  archlinux，未安装图形界面，只安装了yay、vim、zsh、git等基本软件；在/etc/pacman.conf中打开了multilab和archlinuxcn源。 汇编工具链  以后，需要使用自己的工具链时，可以添加下面的行到conf/env.mk1GCCPREFIX= 1.测试工具链  下面两条命令应该分别能返回elf32-i386和/usr/lib/gcc/i486-li">
+<meta name="keywords" content="archlinux,MIT6.828,OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT6.828 archlinux环境配置大坑小坑记录">
+<meta property="og:url" content="http://yoursite.com/2019/05/29/MIT6-828-：环境配置/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="初始环境  archlinux，未安装图形界面，只安装了yay、vim、zsh、git等基本软件；在/etc/pacman.conf中打开了multilab和archlinuxcn源。 汇编工具链  以后，需要使用自己的工具链时，可以添加下面的行到conf/env.mk1GCCPREFIX= 1.测试工具链  下面两条命令应该分别能返回elf32-i386和/usr/lib/gcc/i486-li">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-05-29T06:47:53.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT6.828 archlinux环境配置大坑小坑记录">
+<meta name="twitter:description" content="初始环境  archlinux，未安装图形界面，只安装了yay、vim、zsh、git等基本软件；在/etc/pacman.conf中打开了multilab和archlinuxcn源。 汇编工具链  以后，需要使用自己的工具链时，可以添加下面的行到conf/env.mk1GCCPREFIX= 1.测试工具链  下面两条命令应该分别能返回elf32-i386和/usr/lib/gcc/i486-li">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>MIT6.828 archlinux环境配置大坑小坑记录</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/05/29/archlinux开机脚本/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&text=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&is_video=false&description=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 archlinux环境配置大坑小坑记录&body=Check out this article: http://yoursite.com/2019/05/29/MIT6-828-：环境配置/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&name=MIT6.828 archlinux环境配置大坑小坑记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始环境"><span class="toc-number">1.</span> <span class="toc-text">初始环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编工具链"><span class="toc-number">2.</span> <span class="toc-text">汇编工具链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-测试工具链"><span class="toc-number">2.1.</span> <span class="toc-text">1.测试工具链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载必要包"><span class="toc-number">2.2.</span> <span class="toc-text">2.下载必要包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译安装到-usr-local"><span class="toc-number">2.3.</span> <span class="toc-text">3.编译安装到/usr/local</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-上面可能遇到的一些问题："><span class="toc-number">2.4.</span> <span class="toc-text">4.上面可能遇到的一些问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QEMU模拟器"><span class="toc-number">3.</span> <span class="toc-text">QEMU模拟器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-解决依赖-编译-安装"><span class="toc-number">3.1.</span> <span class="toc-text">1.解决依赖+编译+安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-可能出现的问题"><span class="toc-number">3.2.</span> <span class="toc-text">2.可能出现的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MIT6.828 archlinux环境配置大坑小坑记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-05-29T06:47:22.000Z" itemprop="datePublished">2019-05-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/MIT6-828/">MIT6.828</a>, <a class="tag-link" href="/tags/OS/">OS</a>, <a class="tag-link" href="/tags/archlinux/">archlinux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="初始环境"><a href="#初始环境" class="headerlink" title="初始环境"></a>初始环境</h2><p>  archlinux，未安装图形界面，只安装了yay、vim、zsh、git等基本软件；在/etc/pacman.conf中打开了multilab和archlinuxcn源。</p>
+<h2 id="汇编工具链"><a href="#汇编工具链" class="headerlink" title="汇编工具链"></a>汇编工具链</h2><p>  以后，需要使用自己的工具链时，可以添加下面的行到<code>conf/env.mk</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GCCPREFIX=</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-测试工具链"><a href="#1-测试工具链" class="headerlink" title="1.测试工具链"></a>1.测试工具链</h3><p>  下面两条命令应该分别能返回<code>elf32-i386</code>和<code>/usr/lib/gcc/i486-linux-gnu/version/libgcc.a</code>之类的32位链接库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">% objdump -i</span><br><span class="line">% gcc -m32 -<span class="built_in">print</span>-libgcc-file-name</span><br></pre></td></tr></table></figure></p>
+<p>  在这里我使用archlinux并没有出现任何错误，可能出现的错误应该是机器为64位但是32位支持不足导致的。</p>
+<h3 id="2-下载必要包"><a href="#2-下载必要包" class="headerlink" title="2.下载必要包"></a>2.下载必要包</h3><p>  官方似乎提供了一台配置好了环境的虚拟机，类似 ubuntu-10.04.1-desktop-i386.iso；我使用自己的archlinux，所以我们要下载软件包手动编译：</p>
+<ul>
+<li><a href="ftp://ftp.gmplib.org/pub/gmp-5.0.2/gmp-5.0.2.tar.bz2" target="_blank" rel="noopener">ftp://ftp.gmplib.org/pub/gmp-5.0.2/gmp-5.0.2.tar.bz2</a></li>
+<li><a href="https://www.mpfr.org/mpfr-3.1.2/mpfr-3.1.2.tar.bz2" target="_blank" rel="noopener">https://www.mpfr.org/mpfr-3.1.2/mpfr-3.1.2.tar.bz2</a></li>
+<li><a href="http://www.multiprecision.org/downloads/mpc-0.9.tar.gz" target="_blank" rel="noopener">http://www.multiprecision.org/downloads/mpc-0.9.tar.gz</a></li>
+<li><a href="http://ftpmirror.gnu.org/binutils/binutils-2.21.1.tar.bz2" target="_blank" rel="noopener">http://ftpmirror.gnu.org/binutils/binutils-2.21.1.tar.bz2</a></li>
+<li><a href="http://ftpmirror.gnu.org/gcc/gcc-4.6.4/gcc-core-4.6.4.tar.bz2" target="_blank" rel="noopener">http://ftpmirror.gnu.org/gcc/gcc-4.6.4/gcc-core-4.6.4.tar.bz2</a></li>
+<li><a href="http://ftpmirror.gnu.org/gdb/gdb-7.3.1.tar.bz2" target="_blank" rel="noopener">http://ftpmirror.gnu.org/gdb/gdb-7.3.1.tar.bz2</a><br>上面的软件包也可以使用新版本，链接也可能失效。没有图形界面的我在win宿主机下载包到<strong>共享文件夹</strong>。</li>
+</ul>
+<h3 id="3-编译安装到-usr-local"><a href="#3-编译安装到-usr-local" class="headerlink" title="3.编译安装到/usr/local"></a>3.编译安装到/usr/local</h3><p>  <strong>编译安装需要1G的磁盘空间</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar xjf gmp-5.0.2.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> gmp-5.0.2</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span></span><br><span class="line">make</span><br><span class="line">make install	<span class="comment">#需要root权限</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure></p>
+<p>  对剩下的几个工具做类似的操作。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">tar xjf mpfr-3.1.2.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> mpfr-3.1.2</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span></span><br><span class="line">make</span><br><span class="line">make install	<span class="comment">#需要root权限</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">tar xzf mpc-0.9.tar.gz</span><br><span class="line"><span class="built_in">cd</span> mpc-0.9</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span></span><br><span class="line">make</span><br><span class="line">make install	<span class="comment">#需要root权限</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">tar xjf binutils-2.21.1.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> binutils-2.21.1</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span> --target=i386-jos-elf --<span class="built_in">disable</span>-werror</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line">tar xjf gcc-core-4.6.4.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> gcc-4.6.4</span><br><span class="line">mkdir build              <span class="comment">#不创建这个文件夹就无法编译gcc</span></span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">../configure --prefix=/usr/<span class="built_in">local</span> \</span><br><span class="line">    --target=i386-jos-elf --<span class="built_in">disable</span>-werror \</span><br><span class="line">    --<span class="built_in">disable</span>-libssp --<span class="built_in">disable</span>-libmudflap --with-newlib \</span><br><span class="line">    --without-headers --<span class="built_in">enable</span>-languages=c MAKEINFO=missing</span><br><span class="line">make all-gcc</span><br><span class="line">make install-gcc         <span class="comment">#需要root权限</span></span><br><span class="line">make all-target-libgcc</span><br><span class="line">make install-target-libgcc     <span class="comment">#需要root权限</span></span><br><span class="line"><span class="built_in">cd</span> ../..</span><br><span class="line"></span><br><span class="line">i386-jos-elf-gcc -v</span><br><span class="line"><span class="comment"># 查看版本检查安装是否正确，应该为下面格式:</span></span><br><span class="line"><span class="comment"># Using built-in specs.</span></span><br><span class="line"><span class="comment"># COLLECT_GCC=i386-jos-elf-gcc</span></span><br><span class="line"><span class="comment"># COLLECT_LTO_WRAPPER=/usr/local/libexec/gcc/i386-jos-elf/4.6.4/lto-wrapper</span></span><br><span class="line"><span class="comment"># Target: i386-jos-elf</span></span><br><span class="line"><span class="comment"># 还有些别的信息...</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">tar xjf gdb-7.3.1.tar.bz2</span><br><span class="line"><span class="built_in">cd</span> gdb-7.3.1</span><br><span class="line">./configure --prefix=/usr/<span class="built_in">local</span> --target=i386-jos-elf --program-prefix=i386-jos-elf- \</span><br><span class="line">    --<span class="built_in">disable</span>-werror <span class="comment">#i-jos-elf-是前缀名</span></span><br><span class="line">make all</span><br><span class="line">make install             <span class="comment">#需要root权限,否则会报出依赖链递归的错误</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure></p>
+<p>  安装结束之后，6个软件包的解压目录都可以删除。<br>  其中gcc4所消耗的时间是最多的，从参数可以看出我们所自主编译安装的这些工具是针对i386-jos-elf进行特化的；这些软件安装到<code>/usr/local</code>之后，软件名都加上了<code>i386-jos-elf</code>的前缀，安装完上面全部软件后，<code>/usr/local/bin</code>目录如下所示<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">i386-jos-elf-addr2line</span><br><span class="line">i386-jos-elf-ar</span><br><span class="line">i386-jos-elf-as</span><br><span class="line">i386-jos-elf-c++filt</span><br><span class="line">i386-jos-elf-cpp</span><br><span class="line">i386-jos-elf-elfedit</span><br><span class="line">i386-jos-elf-gcc</span><br><span class="line">i386-jos-elf-gcc-4.6.4</span><br><span class="line">i386-jos-elf-gcov</span><br><span class="line">i386-jos-elf-gdb</span><br><span class="line">i386-jos-elf-gdb-add-index</span><br><span class="line">i386-jos-elf-gdbtui</span><br><span class="line">i386-jos-elf-gprof</span><br><span class="line">i386-jos-elf-ld</span><br><span class="line">i386-jos-elf-ld.bfd</span><br><span class="line">i386-jos-elf-nm</span><br><span class="line">i386-jos-elf-objcopy</span><br><span class="line">i386-jos-elf-objdump</span><br><span class="line">i386-jos-elf-ranlib</span><br><span class="line">i386-jos-elf-readelf</span><br><span class="line">i386-jos-elf-size</span><br><span class="line">i386-jos-elf-strings</span><br><span class="line">i386-jos-elf-strip</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-上面可能遇到的一些问题："><a href="#4-上面可能遇到的一些问题：" class="headerlink" title="4.上面可能遇到的一些问题："></a>4.上面可能遇到的一些问题：</h3><p>  <strong>gmp 的 make install 提醒make check</strong>，我们按照提示所说的运行一下即可，最终58组测试只有1组没有通过，也没用眼中的error，所以无视之。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">+-------------------------------------------------------------+</span><br><span class="line">| CAUTION:                                                    |</span><br><span class="line">|                                                             | </span><br><span class="line">| If you have not already run <span class="string">"make check"</span>, <span class="keyword">then</span> we strongly  | </span><br><span class="line">| recommend you <span class="keyword">do</span> so.                                        |</span><br><span class="line">|                                                             |</span><br><span class="line">| GMP has been carefully tested by its authors, but compilers |</span><br><span class="line">| are all too often released with serious bugs.  GMP tends to |</span><br><span class="line">| explore interesting corners <span class="keyword">in</span> compilers and has hit bugs   |</span><br><span class="line">| on quite a few occasions.                                   |</span><br><span class="line">|                                                             |</span><br><span class="line">+-------------------------------------------------------------+</span><br></pre></td></tr></table></figure></p>
+<p>  <strong>binutils make install出现错误</strong>，binutils是个不太友好的软件，make期间就出现了很多warning，经过漫长的一段时间之后吐出2个error；在访问了<a href="gnu.mirrors.hoobly.com/binutils/">下载页面</a>我发现2.21.1版本已经是2011年的版本了，考虑到我的archlinux已经是2019年的系统，可以尝试适当提升版本；实践证明2.24版本是可行的。</p>
+<p>  <strong>gdb编译安装</strong>,gdb安装不正常，可能是版本差别太大导致的；在尝试了多个版本之后；最终使用<a href="http://mirror.us-midwest-1.nexcess.net/gnu/gdb/gdb-8.3.tar.gz" target="_blank" rel="noopener">gdb8.3</a>编译安装成功，下面是我编译安装成功后的版本信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/bin/i386-jos-elf-gnu -v</span><br><span class="line">GNU gdb (GDB) 8.3</span><br><span class="line">Copyright (C) 2019 Free Software Foundation, Inc.</span><br><span class="line">License GPLvvim 3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;</span><br><span class="line">This is free software: you are free to change and redistribute it.</span><br><span class="line">There is NO WARRANTY, to the extent permitted by law.</span><br></pre></td></tr></table></figure></p>
+<h2 id="QEMU模拟器"><a href="#QEMU模拟器" class="headerlink" title="QEMU模拟器"></a>QEMU模拟器</h2><p>  qemu是一个现代快速PC模拟器，MIT6.828提供了一个特制的QEMU。<br>  在ubuntu16.04上安装QEMU需要<code>libsdl1.2-dev, libtool-bin, libglib2.0-dev, libz-dev, libpixman-1-dev</code>这几个包，而其他系统上没有给出解决办法。方括号内为可选参数，记得将PFX改为自定义的安装目录。</p>
+<h3 id="1-解决依赖-编译-安装"><a href="#1-解决依赖-编译-安装" class="headerlink" title="1.解决依赖+编译+安装"></a>1.解决依赖+编译+安装</h3><p>  经过自顶向下解决依赖，确定了archlinux需要的包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mit-pdos/6.828-qemu.git qemu</span><br><span class="line"><span class="built_in">cd</span> qemu</span><br><span class="line">pacman -S python2 pixman</span><br><span class="line">git submodule update --init dtc</span><br></pre></td></tr></table></figure></p>
+<p>  解决完依赖后就可以正常安装了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --<span class="built_in">disable</span>-kvm --<span class="built_in">disable</span>-werror --python=<span class="string">"python2的位置，注意是python2不是python3"</span> [--prefix=PFX] [--target-list=<span class="string">"i386-softmmu x86_64-softmmu"</span>] </span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-可能出现的问题"><a href="#2-可能出现的问题" class="headerlink" title="2.可能出现的问题"></a>2.可能出现的问题</h3><p>  make编译时可能出现下面的bug，我们看到<strong>undefined reference</strong>就应该快速反应过来这是因为<strong>缺少某些<code>.o</code>目标文件</strong>导致符号无法解析。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">`dev_major_minor<span class="string">':</span></span><br><span class="line"><span class="string">/home/jhd/6828/qemu/qga/commands-posix.c:638: undefined reference to `major'</span></span><br><span class="line">/usr/bin/ld: /home/jhd/6828/qemu/qga/commands-posix.c:634: undefined reference to `minor<span class="string">'</span></span><br></pre></td></tr></table></figure></p>
+<p>  解决方式是在上面的<code>commands-posix.c</code>文件中加入<code>#include &lt;sys/sysmacros.h&gt;</code>。<br>  再次make又出现同样的问题:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: <span class="keyword">in</span> <span class="keyword">function</span> `stat_to_v9stat<span class="string">':</span></span><br><span class="line"><span class="string">/home/jhd/6828/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `minor'</span></span><br><span class="line">/usr/bin/ld: /home/bs/learning/6.828/qemu/hw/9pfs/virtio-9p.c:796: undefined reference to `major<span class="string">'</span></span><br><span class="line"><span class="string">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_mknod'</span>:</span><br><span class="line">/home/jhd/6828/qemu/hw/9pfs/virtio-9p.c:2803: undefined reference to `makedev<span class="string">'</span></span><br><span class="line"><span class="string">/usr/bin/ld: ../hw/9pfs/virtio-9p.o: in function `v9fs_create'</span>:</span><br><span class="line">/home/jhd/6828/qemu/hw/9pfs/virtio-9p.c:2124: undefined reference to `makedev<span class="string">'</span></span><br></pre></td></tr></table></figure></p>
+<p>  如法炮制在<code>virtio-9p.c</code>加入<code>#include &lt;sys/sysmacros.h&gt;</code><br>  之后make install即安装成功。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://pdos.csail.mit.edu/6.828/2018/tools.html" target="_blank" rel="noopener">MIT6.828/2018</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  MIT6.828的环境配置花了我一个上午加一个中午，主要的难点是在archlinux上这些软件版本有的过于古老无法使用；解决的方法是使用新版本的软件。<br>  以前没有自己手动编译安装过这么大的软件，无数的warnning糊了一脸；盯着编译的滚幕感觉望眼欲穿。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始环境"><span class="toc-number">1.</span> <span class="toc-text">初始环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#汇编工具链"><span class="toc-number">2.</span> <span class="toc-text">汇编工具链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-测试工具链"><span class="toc-number">2.1.</span> <span class="toc-text">1.测试工具链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载必要包"><span class="toc-number">2.2.</span> <span class="toc-text">2.下载必要包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译安装到-usr-local"><span class="toc-number">2.3.</span> <span class="toc-text">3.编译安装到/usr/local</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-上面可能遇到的一些问题："><span class="toc-number">2.4.</span> <span class="toc-text">4.上面可能遇到的一些问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#QEMU模拟器"><span class="toc-number">3.</span> <span class="toc-text">QEMU模拟器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-解决依赖-编译-安装"><span class="toc-number">3.1.</span> <span class="toc-text">1.解决依赖+编译+安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-可能出现的问题"><span class="toc-number">3.2.</span> <span class="toc-text">2.可能出现的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&text=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&is_video=false&description=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 archlinux环境配置大坑小坑记录&body=Check out this article: http://yoursite.com/2019/05/29/MIT6-828-：环境配置/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&title=MIT6.828 archlinux环境配置大坑小坑记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/29/MIT6-828-：环境配置/&name=MIT6.828 archlinux环境配置大坑小坑记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
