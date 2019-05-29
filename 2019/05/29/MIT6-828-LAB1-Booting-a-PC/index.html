@@ -6,19 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保">
+    <meta name="description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  boot.asm也反汇编出了这段代码：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处">
 <meta name="keywords" content="MIT6.828,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MIT6.828 LAB1 : Booting a PC">
 <meta property="og:url" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
-<meta property="og:description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保">
+<meta property="og:description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  boot.asm也反汇编出了这段代码：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/pro32.png">
-<meta property="og:updated_time" content="2019-05-29T16:27:18.133Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/bootpro32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/lasti.png">
+<meta property="og:updated_time" content="2019-05-29T17:07:38.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6.828 LAB1 : Booting a PC">
-<meta name="twitter:description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保">
+<meta name="twitter:description" content="Excercise3  在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？  使用gdb单步执行到出现提示信息：  boot.asm也反汇编出了这段代码：  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处">
 <meta name="twitter:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/pro32.png">
     
     
@@ -147,9 +149,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="Excercise3"><a href="#Excercise3" class="headerlink" title="Excercise3"></a>Excercise3</h2><p>  <strong>在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？</strong><br>  使用gdb单步执行到出现提示信息：<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/pro32.png" title="单步执行到出现模式转换信息"><br>  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保护模式。</p>
-<p>  <strong>boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</strong></p>
-<p>  <strong>内核的第一条指令在哪？</strong></p>
+    <h2 id="Excercise3"><a href="#Excercise3" class="headerlink" title="Excercise3"></a>Excercise3</h2><p>  <strong>在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？</strong><br>  使用gdb单步执行到出现提示信息：<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/pro32.png" title="单步执行到出现模式转换信息"><br>  boot.asm也反汇编出了这段代码：<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/bootpro32.png" title="对应反汇编指令"><br>  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保护模式。</p>
+<p>  <strong>boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</strong><br>  阅读boot.asm发现在经过模式转换之后调用bootmain函数，bootmain函数的结尾调用了一个 没有返回值的函数，可以视为boot loader的最后一条指令。<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/lasti.png" title="最后的指令"><br>  <strong>内核的第一条指令在哪？</strong></p>
 <p>  <strong>为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</strong></p>
 
   </div>
