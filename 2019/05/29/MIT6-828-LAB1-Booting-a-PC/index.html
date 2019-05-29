@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Part1:PC Bootstrapx86汇编  汇编大概分两大类，NASM汇编器使用Intel语法；GNU汇编器使用AT&amp;amp;T语法。 Excercise1  熟悉汇编语言材料，当作工具书备查。 仿真x86  首先进入lab编译生成内核的镜像文件。12cd labmake   然后使用虚拟机qemu进行仿真，注意自行安装的qemu还没有加入PATH变量，还需要在~/.zshrc或别的sh配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT6.828 LAB1 : Booting a PC">
+<meta property="og:url" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="Part1:PC Bootstrapx86汇编  汇编大概分两大类，NASM汇编器使用Intel语法；GNU汇编器使用AT&amp;amp;T语法。 Excercise1  熟悉汇编语言材料，当作工具书备查。 仿真x86  首先进入lab编译生成内核的镜像文件。12cd labmake   然后使用虚拟机qemu进行仿真，注意自行安装的qemu还没有加入PATH变量，还需要在~/.zshrc或别的sh配置">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/make-qemu-nox.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/qemu-nox-gdb.png">
+<meta property="og:updated_time" content="2019-05-29T09:06:09.651Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT6.828 LAB1 : Booting a PC">
+<meta name="twitter:description" content="Part1:PC Bootstrapx86汇编  汇编大概分两大类，NASM汇编器使用Intel语法；GNU汇编器使用AT&amp;amp;T语法。 Excercise1  熟悉汇编语言材料，当作工具书备查。 仿真x86  首先进入lab编译生成内核的镜像文件。12cd labmake   然后使用虚拟机qemu进行仿真，注意自行安装的qemu还没有加入PATH变量，还需要在~/.zshrc或别的sh配置">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/make-qemu-nox.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>MIT6.828 LAB1 : Booting a PC</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/05/29/MIT6-828-：环境配置/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&text=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&is_video=false&description=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 LAB1 : Booting a PC&body=Check out this article: http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&name=MIT6.828 LAB1 : Booting a PC&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part1-PC-Bootstrap"><span class="toc-number">1.</span> <span class="toc-text">Part1:PC Bootstrap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#x86汇编"><span class="toc-number">1.1.</span> <span class="toc-text">x86汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Excercise1"><span class="toc-number">1.1.1.</span> <span class="toc-text">Excercise1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仿真x86"><span class="toc-number">1.2.</span> <span class="toc-text">仿真x86</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PC的物理地址空间"><span class="toc-number">1.3.</span> <span class="toc-text">PC的物理地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROM-BIOS"><span class="toc-number">1.4.</span> <span class="toc-text">ROM BIOS</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MIT6.828 LAB1 : Booting a PC
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-05-29T08:20:49.000Z" itemprop="datePublished">2019-05-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Part1-PC-Bootstrap"><a href="#Part1-PC-Bootstrap" class="headerlink" title="Part1:PC Bootstrap"></a>Part1:PC Bootstrap</h2><h3 id="x86汇编"><a href="#x86汇编" class="headerlink" title="x86汇编"></a>x86汇编</h3><p>  汇编大概分两大类，NASM汇编器使用Intel语法；GNU汇编器使用AT&amp;T语法。</p>
+<h4 id="Excercise1"><a href="#Excercise1" class="headerlink" title="Excercise1"></a>Excercise1</h4><p>  熟悉<a href="https://pdos.csail.mit.edu/6.828/2018/reference.html" target="_blank" rel="noopener">汇编语言材料</a>，当作工具书备查。</p>
+<h3 id="仿真x86"><a href="#仿真x86" class="headerlink" title="仿真x86"></a>仿真x86</h3><p>  首先进入lab编译生成内核的镜像文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> lab</span><br><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<p>  然后使用虚拟机qemu进行仿真，注意自行安装的qemu还没有加入PATH变量，还需要在<code>~/.zshrc</code>或别的sh配置文件中的最后加上修改PATH变量的语句。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/home/jhd/qemu/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></p>
+<p>  之后就可以执行<code>make qemu</code>或者<code>make qemu-nox</code>来运行内核了。<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/make-qemu-nox.png" title="执行make qemu-nox的运行结果"></p>
+<h3 id="PC的物理地址空间"><a href="#PC的物理地址空间" class="headerlink" title="PC的物理地址空间"></a>PC的物理地址空间</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">+------------------+  &lt;- 0xFFFFFFFF (4GB)</span><br><span class="line">|      32-bit      |</span><br><span class="line">|  memory mapped   |</span><br><span class="line">|     devices      |</span><br><span class="line">|                  |</span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line"></span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line">|                  |</span><br><span class="line">|      Unused      |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- depends on amount of RAM</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">| Extended Memory  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00100000 (1MB)</span><br><span class="line">|     BIOS ROM     |</span><br><span class="line">+------------------+  &lt;- 0x000F0000 (960KB)</span><br><span class="line">|  16-bit devices, |</span><br><span class="line">|  expansion ROMs  |</span><br><span class="line">+------------------+  &lt;- 0x000C0000 (768KB)</span><br><span class="line">|   VGA Display    |</span><br><span class="line">+------------------+  &lt;- 0x000A0000 (640KB)</span><br><span class="line">|                  |</span><br><span class="line">|    Low Memory    |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00000000</span><br></pre></td></tr></table></figure>
+<h3 id="ROM-BIOS"><a href="#ROM-BIOS" class="headerlink" title="ROM BIOS"></a>ROM BIOS</h3><p>  在两个终端先后运行<code>make qemu-nox-gdb</code>和<code>make gdb</code>，其中后者如下显示：<br><img src="/2019/05/29/MIT6-828-LAB1-Booting-a-PC/qemu-nox-gdb.png" title="执行make qemu-nox-gdb的运行结果"><br>  内核的第一条指令如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[f000:fff0] 0xffff0:	ljmp   $0xf000,$0xe05b</span><br></pre></td></tr></table></figure></p>
+<p>  从中我们可以看出这条指令的起始地址，它跳转到目标地址，用CS:IP表示。<br>  因为BIOS和物理地址0x000f0000-0x000fffff是“硬连线”的，这保证了BIOS对开机的据对掌控；此外我们曾在汇编中学习过：physical address = 16 * segment + offset</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part1-PC-Bootstrap"><span class="toc-number">1.</span> <span class="toc-text">Part1:PC Bootstrap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#x86汇编"><span class="toc-number">1.1.</span> <span class="toc-text">x86汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Excercise1"><span class="toc-number">1.1.1.</span> <span class="toc-text">Excercise1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#仿真x86"><span class="toc-number">1.2.</span> <span class="toc-text">仿真x86</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PC的物理地址空间"><span class="toc-number">1.3.</span> <span class="toc-text">PC的物理地址空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ROM-BIOS"><span class="toc-number">1.4.</span> <span class="toc-text">ROM BIOS</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&text=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&is_video=false&description=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 LAB1 : Booting a PC&body=Check out this article: http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/29/MIT6-828-LAB1-Booting-a-PC/&name=MIT6.828 LAB1 : Booting a PC&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
