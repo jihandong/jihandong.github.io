@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Part1&amp;amp;2 ： 启动与boot loader  PC物理地址如下所示：1234567891011121314151617181920212223242526272829+------------------+  &amp;lt;- 0xFFFFFFFF (4GB)|      32-bit      ||  memory mapped   ||     devices      ||">
+<meta name="keywords" content="MIT6.828,OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT6.828 LAB1 : Booting a PC">
+<meta property="og:url" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="Part1&amp;amp;2 ： 启动与boot loader  PC物理地址如下所示：1234567891011121314151617181920212223242526272829+------------------+  &amp;lt;- 0xFFFFFFFF (4GB)|      32-bit      ||  memory mapped   ||     devices      ||">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/pro32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/bootpro32.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/lasti.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/2kernel1.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/ELF.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/kernelhead.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/0x7c33.png">
+<meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/0x10000.png">
+<meta property="og:updated_time" content="2019-05-30T18:12:33.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT6.828 LAB1 : Booting a PC">
+<meta name="twitter:description" content="Part1&amp;amp;2 ： 启动与boot loader  PC物理地址如下所示：1234567891011121314151617181920212223242526272829+------------------+  &amp;lt;- 0xFFFFFFFF (4GB)|      32-bit      ||  memory mapped   ||     devices      ||">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/pro32.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>MIT6.828 LAB1 : Booting a PC</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/05/29/MIT6-828-：环境配置/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&text=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&is_video=false&description=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 LAB1 : Booting a PC&body=Check out this article: http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&name=MIT6.828 LAB1 : Booting a PC&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part1-amp-2-：-启动与boot-loader"><span class="toc-number">1.</span> <span class="toc-text">Part1&amp;2 ： 启动与boot loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-内核的第一条指令在哪？"><span class="toc-number">2.3.</span> <span class="toc-text">3.3 内核的第一条指令在哪？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><span class="toc-number">2.4.</span> <span class="toc-text">3.4 为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise5"><span class="toc-number">3.</span> <span class="toc-text">Exercise5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Change-the-link-address-in-boot-Makefrag-to-something-wrong-run-make-clean-recompile-the-lab-with-make-and-trace-into-the-boot-loader-again-to-see-what-happens"><span class="toc-number">3.1.</span> <span class="toc-text">Change the link address in boot/Makefrag to something wrong, run make clean, recompile the lab with make, and trace into the boot loader again to see what happens.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise6"><span class="toc-number">4.</span> <span class="toc-text">Exercise6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在进入boot-loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）"><span class="toc-number">4.1.</span> <span class="toc-text">在进入boot loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part3-内核"><span class="toc-number">5.</span> <span class="toc-text">Part3 : 内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise7"><span class="toc-number">6.</span> <span class="toc-text">Excercise7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在指令movl-eax-cr0的前后检查内存0x00100000和-0xf0100000；把kern-entry-S中的movl-eax-cr0注释掉看看会发生什么？"><span class="toc-number">6.1.</span> <span class="toc-text">在指令movl %eax, %cr0的前后检查内存0x00100000和 0xf0100000；把kern/entry.S中的movl %eax, %cr0注释掉看看会发生什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise8"><span class="toc-number">7.</span> <span class="toc-text">Excercise8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我们省略了一小段代码-按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）"><span class="toc-number">7.1.</span> <span class="toc-text">我们省略了一小段代码 - 按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise9"><span class="toc-number">8.</span> <span class="toc-text">Excercise9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise10"><span class="toc-number">9.</span> <span class="toc-text">Excercise10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise11"><span class="toc-number">10.</span> <span class="toc-text">Excercise11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise12"><span class="toc-number">11.</span> <span class="toc-text">Excercise12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">12.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MIT6.828 LAB1 : Booting a PC
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-05-31T08:20:49.000Z" itemprop="datePublished">2019-05-31</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/MIT6-828/">MIT6.828</a>, <a class="tag-link" href="/tags/OS/">OS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Part1-amp-2-：-启动与boot-loader"><a href="#Part1-amp-2-：-启动与boot-loader" class="headerlink" title="Part1&amp;2 ： 启动与boot loader"></a>Part1&amp;2 ： 启动与boot loader</h2><p>  PC物理地址如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">+------------------+  &lt;- 0xFFFFFFFF (4GB)</span><br><span class="line">|      32-bit      |</span><br><span class="line">|  memory mapped   |</span><br><span class="line">|     devices      |</span><br><span class="line">|                  |</span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line"></span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line">|                  |</span><br><span class="line">|      Unused      |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- depends on amount of RAM</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">| Extended Memory  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00100000 (1MB)</span><br><span class="line">|     BIOS ROM     |</span><br><span class="line">+------------------+  &lt;- 0x000F0000 (960KB)</span><br><span class="line">|  16-bit devices, |</span><br><span class="line">|  expansion ROMs  |</span><br><span class="line">+------------------+  &lt;- 0x000C0000 (768KB)</span><br><span class="line">|   VGA Display    |</span><br><span class="line">+------------------+  &lt;- 0x000A0000 (640KB)</span><br><span class="line">|                  |</span><br><span class="line">|    Low Memory    |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00000000</span><br></pre></td></tr></table></figure></p>
+<p>  <strong>BIOS</strong>：BIOS是与主板0x000f0000-0x000fffff“硬链接”的小系统；初始化PCI、建立IDT，它会寻找其他bootable设备，比如从磁盘中找到boot loader，加载并交出控制权。</p>
+<p>  <strong>boot loader</strong>：磁盘中512Byte作为一个扇区，bootable磁盘中的第一个扇区称为boot sector，它会被加载到0x7c00-0x7dff；并使用jmp跳转到0x7c00开始执行。此外boot loader的两个关键作用：</p>
+<ol>
+<li>模式切换：实模式切换到32位保护模式；</li>
+<li>读取内核：将内核通过特殊I/O直接读取。</li>
+</ol>
+<p>  本次实验提供了汇编为bootloader的两个文件boot/boot.S和boot/main.c、bootloader的反汇编文件obj/boot/boot.asm、JOS内核的反汇编文件obj/kern/kernel.asm；反汇编文件使用了如下格式（只能用于人的阅读）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//注释</span><br><span class="line">对应C语句</span><br><span class="line">汇编指令</span><br></pre></td></tr></table></figure></p>
+<p>  由于已经给出了反汇编代码，在下面的问题中可以尽可能利用反汇编代码来理解boot loader的工作而非gdb。</p>
+<h2 id="Excercise3"><a href="#Excercise3" class="headerlink" title="Excercise3"></a>Excercise3</h2><h3 id="3-1-在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><a href="#3-1-在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换" class="headerlink" title="3.1 在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?"></a>3.1 在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</h3><p>  使用gdb单步执行到出现提示信息：<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/pro32.png" title="单步执行到出现模式转换信息"><br>  boot.asm也反汇编出了这段代码：<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/bootpro32.png" title="对应反汇编指令"><br>  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保护模式。</p>
+<h3 id="3-2-boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><a href="#3-2-boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？" class="headerlink" title="3.2 boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"></a>3.2 boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</h3><p>  阅读boot.asm发现在经过模式转换之后调用bootmain函数，bootmain函数的结尾call调用了内核，这是将控制权交给内核的唯一方法；此为boot loader的最后一条指令，而call的地址即为内核的第一条指令。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/lasti.png" title="最后的boot loader指令"><br>  此指令的解释是call *0x10018，即跳转到0x10018处所存储的地址，所以需要使用x/x命令查看内存，随后在相应地址打断点，即可看到内核的第一条指令。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/2kernel1.png" title="最初的kernel指令"></p>
+<h3 id="3-3-内核的第一条指令在哪？"><a href="#3-3-内核的第一条指令在哪？" class="headerlink" title="3.3 内核的第一条指令在哪？"></a>3.3 内核的第一条指令在哪？</h3><p>  如3.2所示，我们通过找到第一条指令的地址0x1000c才看到第一条指令。</p>
+<h3 id="3-4-为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><a href="#3-4-为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？" class="headerlink" title="3.4 为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？"></a>3.4 为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</h3><p> （阅读注释） boot loader要求第一个page为ELF header，读取了一些信息之后，boot loader调用readseg程序循环加载各段，而readseg中调用readsect循环加载各扇区。<br>  首先了解一下<strong>ELF Head Table</strong>:<br>  ELF文件由4部分组成，分别是ELF头（ELF header）、程序头表（Program header table）、节（Section）和节头表（Section header table）。其中Program header描述的是一个段在文件中的位置、大小以及它被放进内存后所在的位置和大小。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/ELF.jpg" title="ELF结构"></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">ELF Header项</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">e_type</td>
+<td style="text-align:left">它标识的是该文件的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">e_machine</td>
+<td style="text-align:left">表明运行该程序需要的体系结构</td>
+</tr>
+<tr>
+<td style="text-align:left">e_version</td>
+<td style="text-align:left">表示文件的版本</td>
+</tr>
+<tr>
+<td style="text-align:left">e_entry</td>
+<td style="text-align:left">程序的入口地址</td>
+</tr>
+<tr>
+<td style="text-align:left">e_phoff</td>
+<td style="text-align:left">表示Program header table 在文件中的偏移量（以字节计数）</td>
+</tr>
+<tr>
+<td style="text-align:left">e_shoff</td>
+<td style="text-align:left">表示Section header table 在文件中的偏移量（以字节计数）</td>
+</tr>
+<tr>
+<td style="text-align:left">e_flags</td>
+<td style="text-align:left">对IA32而言，此项为0</td>
+</tr>
+<tr>
+<td style="text-align:left">e_ehsize</td>
+<td style="text-align:left">表示ELF header大小（以字节计数）</td>
+</tr>
+<tr>
+<td style="text-align:left">e_phentsize</td>
+<td style="text-align:left">表示Program header table中每一个条目的大小</td>
+</tr>
+<tr>
+<td style="text-align:left">e_phnum</td>
+<td style="text-align:left">表示Program header table中有多少个条目</td>
+</tr>
+<tr>
+<td style="text-align:left">e_shentsize</td>
+<td style="text-align:left">表示Section header table中的每一个条目的大小</td>
+</tr>
+<tr>
+<td style="text-align:left">e_shnum</td>
+<td style="text-align:left">表示Section header table中有多少个条目</td>
+</tr>
+<tr>
+<td style="text-align:left">e_shstrndx</td>
+<td style="text-align:left">包含节名称的字符串是第几个节（从零开始计数）</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Program Header项</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">p_type</td>
+<td style="text-align:left">当前Program header所描述的段的类型</td>
+</tr>
+<tr>
+<td style="text-align:left">p_offset</td>
+<td style="text-align:left">段的第一个字节在文件中的偏移</td>
+</tr>
+<tr>
+<td style="text-align:left">p_vaddr</td>
+<td style="text-align:left">段的一个字节在内存中的虚拟地</td>
+</tr>
+<tr>
+<td style="text-align:left">p_paddr</td>
+<td style="text-align:left">在物理内存定位相关的系统中，此项是为物理地址保留</td>
+</tr>
+<tr>
+<td style="text-align:left">p_filesz</td>
+<td style="text-align:left">段在文件中的长度</td>
+</tr>
+<tr>
+<td style="text-align:left">p_memsz</td>
+<td style="text-align:left">段在内存中的长度</td>
+</tr>
+<tr>
+<td style="text-align:left">p_flags</td>
+<td style="text-align:left">与段相关的标志</td>
+</tr>
+<tr>
+<td style="text-align:left">p_align</td>
+<td style="text-align:left">根据此项值来确定段在文件及内存中如何对齐</td>
+</tr>
+</tbody>
+</table>
+<p>  此处是通过ELF header读取了Program header，进而知道了各段信息。我们可以尝试使用objdump的f和p参数查看ELF header和Program Header中的信息：<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/kernelhead.png" title="kern head table"></p>
+<h2 id="Exercise5"><a href="#Exercise5" class="headerlink" title="Exercise5"></a>Exercise5</h2><h3 id="Change-the-link-address-in-boot-Makefrag-to-something-wrong-run-make-clean-recompile-the-lab-with-make-and-trace-into-the-boot-loader-again-to-see-what-happens"><a href="#Change-the-link-address-in-boot-Makefrag-to-something-wrong-run-make-clean-recompile-the-lab-with-make-and-trace-into-the-boot-loader-again-to-see-what-happens" class="headerlink" title="Change the link address in boot/Makefrag to something wrong, run make clean, recompile the lab with make, and trace into the boot loader again to see what happens."></a>Change the link address in boot/Makefrag to something wrong, run make clean, recompile the lab with make, and trace into the boot loader again to see what happens.</h3><p>  打开Makefrag看看（没有语法高亮让这件事变成了眼力活），只能发现一个地址0x7c00，我们知道这个地址是boot loader载入的地方，把这里修改成0x7c33，然后<code>make clean</code>和<code>make</code>。<br>  使用gdb在0x7c00打上断点，发现boot loader已经不见了，再c命令运行一下发现GG了。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/0x7c33.png" title="出事的代码"><br>  在boot.asm中我们可以看到凉掉的代码是<code>ljmp $0xb866,$0x87c32</code>，与我们实际执行的<code>...$0x87c66</code>相比有34的偏移，而0x7c00到0x7c33有33的偏移，本来两处的偏移应该相同，此处可能是因为linux中要求字的起始地址必须为2的倍数（字类型占两个Byte）。<br>  此外，在出现错误之后，运行<code>make qemu-nox-gdb</code>的控制台已经不接受任何指令了，除非重启否则这个控制台已经废了：（</p>
+<h2 id="Exercise6"><a href="#Exercise6" class="headerlink" title="Exercise6"></a>Exercise6</h2><h3 id="在进入boot-loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）"><a href="#在进入boot-loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）" class="headerlink" title="在进入boot loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）"></a>在进入boot loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）</h3><p>  这不难理解，这里是用于载入内核的地址，在boot loader运行之前内核还没有加载。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/0x10000.png" title="用于加载内核的地址"></p>
+<h2 id="Part3-内核"><a href="#Part3-内核" class="headerlink" title="Part3 : 内核"></a>Part3 : 内核</h2><p>  OS习惯被link到高的<strong>虚拟地址</strong>比如0xf0100000，但其实他们还是会被映射回来。</p>
+<h2 id="Excercise7"><a href="#Excercise7" class="headerlink" title="Excercise7"></a>Excercise7</h2><h3 id="在指令movl-eax-cr0的前后检查内存0x00100000和-0xf0100000；把kern-entry-S中的movl-eax-cr0注释掉看看会发生什么？"><a href="#在指令movl-eax-cr0的前后检查内存0x00100000和-0xf0100000；把kern-entry-S中的movl-eax-cr0注释掉看看会发生什么？" class="headerlink" title="在指令movl %eax, %cr0的前后检查内存0x00100000和 0xf0100000；把kern/entry.S中的movl %eax, %cr0注释掉看看会发生什么？"></a>在指令movl %eax, %cr0的前后检查内存0x00100000和 0xf0100000；把kern/entry.S中的movl %eax, %cr0注释掉看看会发生什么？</h3><h2 id="Excercise8"><a href="#Excercise8" class="headerlink" title="Excercise8"></a>Excercise8</h2><h3 id="我们省略了一小段代码-按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）"><a href="#我们省略了一小段代码-按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）" class="headerlink" title="我们省略了一小段代码 - 按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）"></a>我们省略了一小段代码 - 按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）</h3><h2 id="Excercise9"><a href="#Excercise9" class="headerlink" title="Excercise9"></a>Excercise9</h2><h2 id="Excercise10"><a href="#Excercise10" class="headerlink" title="Excercise10"></a>Excercise10</h2><h2 id="Excercise11"><a href="#Excercise11" class="headerlink" title="Excercise11"></a>Excercise11</h2><h2 id="Excercise12"><a href="#Excercise12" class="headerlink" title="Excercise12"></a>Excercise12</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/" target="_blank" rel="noopener">MIT6.828 Lab1</a><br><a href="https://www.jianshu.com/p/84f62a05a7e6" target="_blank" rel="noopener">“找不到工作”的LAB1实验报告</a><br><a href="https://baike.baidu.com/item/ELF/7120560?fr=aladdin" target="_blank" rel="noopener">baidu</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part1-amp-2-：-启动与boot-loader"><span class="toc-number">1.</span> <span class="toc-text">Part1&amp;2 ： 启动与boot loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-内核的第一条指令在哪？"><span class="toc-number">2.3.</span> <span class="toc-text">3.3 内核的第一条指令在哪？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><span class="toc-number">2.4.</span> <span class="toc-text">3.4 为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise5"><span class="toc-number">3.</span> <span class="toc-text">Exercise5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Change-the-link-address-in-boot-Makefrag-to-something-wrong-run-make-clean-recompile-the-lab-with-make-and-trace-into-the-boot-loader-again-to-see-what-happens"><span class="toc-number">3.1.</span> <span class="toc-text">Change the link address in boot/Makefrag to something wrong, run make clean, recompile the lab with make, and trace into the boot loader again to see what happens.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise6"><span class="toc-number">4.</span> <span class="toc-text">Exercise6</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在进入boot-loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）"><span class="toc-number">4.1.</span> <span class="toc-text">在进入boot loader时检查0x100000开始的8个字，进入内核时再检查一遍，为什么它们不同？（回答这个问题其实不需要使用QEMU）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part3-内核"><span class="toc-number">5.</span> <span class="toc-text">Part3 : 内核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise7"><span class="toc-number">6.</span> <span class="toc-text">Excercise7</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在指令movl-eax-cr0的前后检查内存0x00100000和-0xf0100000；把kern-entry-S中的movl-eax-cr0注释掉看看会发生什么？"><span class="toc-number">6.1.</span> <span class="toc-text">在指令movl %eax, %cr0的前后检查内存0x00100000和 0xf0100000；把kern/entry.S中的movl %eax, %cr0注释掉看看会发生什么？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise8"><span class="toc-number">7.</span> <span class="toc-text">Excercise8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#我们省略了一小段代码-按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）"><span class="toc-number">7.1.</span> <span class="toc-text">我们省略了一小段代码 - 按照“％o”形式打印八进制数所需的代码。查找并填写此代码片段（又要考眼力了）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise9"><span class="toc-number">8.</span> <span class="toc-text">Excercise9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise10"><span class="toc-number">9.</span> <span class="toc-text">Excercise10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise11"><span class="toc-number">10.</span> <span class="toc-text">Excercise11</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise12"><span class="toc-number">11.</span> <span class="toc-text">Excercise12</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">12.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&text=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&is_video=false&description=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828 LAB1 : Booting a PC&body=Check out this article: http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&title=MIT6.828 LAB1 : Booting a PC"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/&name=MIT6.828 LAB1 : Booting a PC&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
