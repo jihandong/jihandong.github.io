@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/30/MIT6-828-LAB1-Booting-a-PC/pro32.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/30/MIT6-828-LAB1-Booting-a-PC/bootpro32.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/30/MIT6-828-LAB1-Booting-a-PC/lasti.png">
-<meta property="og:updated_time" content="2019-05-30T07:14:05.544Z">
+<meta property="og:updated_time" content="2019-05-30T07:18:00.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6.828 LAB1 : Booting a PC">
 <meta name="twitter:description" content="预备知识  PC物理地址如下所示：1234567891011121314151617181920212223242526272829+------------------+  &amp;lt;- 0xFFFFFFFF (4GB)|      32-bit      ||  memory mapped   ||     devices      ||                  |/\/\/\/\/\">
@@ -63,13 +63,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </span>
@@ -83,10 +83,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#预备知识"><span class="toc-number">1.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#预备知识"><span class="toc-number">1.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><span class="toc-number">2.1.</span> <span class="toc-text">在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><span class="toc-number">2.2.</span> <span class="toc-text">boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核的第一条指令在哪？"><span class="toc-number">2.3.</span> <span class="toc-text">内核的第一条指令在哪？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><span class="toc-number">2.4.</span> <span class="toc-text">为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -150,19 +150,16 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p>  PC物理地址如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">+------------------+  &lt;- 0xFFFFFFFF (4GB)</span><br><span class="line">|      32-bit      |</span><br><span class="line">|  memory mapped   |</span><br><span class="line">|     devices      |</span><br><span class="line">|                  |</span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line"></span><br><span class="line">/\/\/\/\/\/\/\/\/\/\</span><br><span class="line">|                  |</span><br><span class="line">|      Unused      |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- depends on amount of RAM</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">| Extended Memory  |</span><br><span class="line">|                  |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00100000 (1MB)</span><br><span class="line">|     BIOS ROM     |</span><br><span class="line">+------------------+  &lt;- 0x000F0000 (960KB)</span><br><span class="line">|  16-bit devices, |</span><br><span class="line">|  expansion ROMs  |</span><br><span class="line">+------------------+  &lt;- 0x000C0000 (768KB)</span><br><span class="line">|   VGA Display    |</span><br><span class="line">+------------------+  &lt;- 0x000A0000 (640KB)</span><br><span class="line">|                  |</span><br><span class="line">|    Low Memory    |</span><br><span class="line">|                  |</span><br><span class="line">+------------------+  &lt;- 0x00000000</span><br></pre></td></tr></table></figure></p>
-<p>  <strong>BIOS</strong>：BIOS是与主板0x000f0000-0x000fffff“硬链接”的小系统；初始化PCI、建立IDT，它会寻找其他bootable设备，比如从磁盘中找到boot loader，加载并交出控制权。<br>  <strong>boot loader</strong>：磁盘中512Byte作为一个扇区，bootable磁盘中的第一个扇区称为boot sector，它会被加载到0x7c00-0x7dff；并使用jmp跳转到0x7c00开始执行。此外boot loader的两个关键作用：</p>
+<p>  <strong>BIOS</strong>：BIOS是与主板0x000f0000-0x000fffff“硬链接”的小系统；初始化PCI、建立IDT，它会寻找其他bootable设备，比如从磁盘中找到boot loader，加载并交出控制权。</p>
+<p>  <strong>boot loader</strong>：磁盘中512Byte作为一个扇区，bootable磁盘中的第一个扇区称为boot sector，它会被加载到0x7c00-0x7dff；并使用jmp跳转到0x7c00开始执行。此外boot loader的两个关键作用：</p>
 <ol>
 <li>模式切换：实模式切换到32位保护模式；</li>
-<li><p>读取内核：将内核通过特殊I/O直接读取。</p>
-<p>本次实验提供了boot loader的反汇编文件obj/boot/boot.asm和JOS内核的反汇编文件obj/kern/kernel.asm；它们使用了如下格式（即只能用于人的阅读）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//注释</span><br><span class="line">对应C语句</span><br><span class="line">汇编指令</span><br></pre></td></tr></table></figure>
-</li>
+<li>读取内核：将内核通过特殊I/O直接读取。</li>
 </ol>
-<h2 id="Excercise3"><a href="#Excercise3" class="headerlink" title="Excercise3"></a>Excercise3</h2><p>  <strong>在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换？</strong><br>  使用gdb单步执行到出现提示信息：<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/pro32.png" title="单步执行到出现模式转换信息"><br>  boot.asm也反汇编出了这段代码：<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/bootpro32.png" title="对应反汇编指令"><br>  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保护模式。</p>
-<p>  <strong>boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</strong><br>  阅读boot.asm发现在经过模式转换之后调用bootmain函数，bootmain函数的结尾call调用了内核，这是将控制权交给内核的唯一方法；此为boot loader的最后一条指令，而call的地址即为内核的第一条指令<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/lasti.png" title="最后的boot loader指令"><br>  访问内存即可获得内核的最后一条指令。</p>
-<p>  <strong>内核的第一条指令在哪？</strong></p>
-<p>  <strong>为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</strong></p>
-
+<p>  本次实验提供了boot loader的反汇编文件obj/boot/boot.asm和JOS内核的反汇编文件obj/kern/kernel.asm；它们使用了如下格式（即只能用于人的阅读）。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//注释</span><br><span class="line">对应C语句</span><br><span class="line">汇编指令</span><br></pre></td></tr></table></figure></p>
+<h2 id="Excercise3"><a href="#Excercise3" class="headerlink" title="Excercise3"></a>Excercise3</h2><h3 id="在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><a href="#在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换" class="headerlink" title="在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?"></a>在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</h3><p>  使用gdb单步执行到出现提示信息：<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/pro32.png" title="单步执行到出现模式转换信息"><br>  boot.asm也反汇编出了这段代码：<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/bootpro32.png" title="对应反汇编指令"><br>  %cr0不是通用寄存器，它是4个控制寄存器之一；其中%cr0包含了6个预定义标志，0位是保护允许位PE(Protedted Enable)，用于启动保护模式，如果PE位置1，则保护模式启动，如果PE=0，则在实模式下运行。此处的三条语句将0位调整为1；即从实模式进入保护模式。</p>
+<h3 id="boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><a href="#boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？" class="headerlink" title="boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"></a>boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</h3><p>  阅读boot.asm发现在经过模式转换之后调用bootmain函数，bootmain函数的结尾call调用了内核，这是将控制权交给内核的唯一方法；此为boot loader的最后一条指令，而call的地址即为内核的第一条指令<br><img src="/2019/05/30/MIT6-828-LAB1-Booting-a-PC/lasti.png" title="最后的boot loader指令"><br>  访问内存即可获得内核的最后一条指令。</p>
+<h3 id="内核的第一条指令在哪？"><a href="#内核的第一条指令在哪？" class="headerlink" title="内核的第一条指令在哪？"></a>内核的第一条指令在哪？</h3><h3 id="为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><a href="#为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？" class="headerlink" title="为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？"></a>为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</h3>
   </div>
 </article>
 
@@ -175,19 +172,19 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#预备知识"><span class="toc-number">1.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#预备知识"><span class="toc-number">1.</span> <span class="toc-text">预备知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise3"><span class="toc-number">2.</span> <span class="toc-text">Excercise3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换"><span class="toc-number">2.1.</span> <span class="toc-text">在什么时候处理器转为执行32位代码？究竟是什么导致了这种模式转换?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot-loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？"><span class="toc-number">2.2.</span> <span class="toc-text">boot loader执行的最后一条指令是什么？刚加载的内核的第一条指令又是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核的第一条指令在哪？"><span class="toc-number">2.3.</span> <span class="toc-text">内核的第一条指令在哪？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为了取出整个内核，boot-loader如何知道要读取多少扇区？它在哪找到这个信息？"><span class="toc-number">2.4.</span> <span class="toc-text">为了取出整个内核，boot loader如何知道要读取多少扇区？它在哪找到这个信息？</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -207,10 +204,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
     </div>
 
   </div>
@@ -225,13 +222,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </nav>
