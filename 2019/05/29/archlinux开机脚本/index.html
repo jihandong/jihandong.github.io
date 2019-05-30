@@ -59,13 +59,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">خانه</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">درباره</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">نوشته‌ها</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">پروژه‌ها</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </span>
@@ -81,10 +81,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">پست پیشین</span>
-      <span id="i-next" class="info" style="display:none;">پست یعدی</span>
-      <span id="i-top" class="info" style="display:none;">بازگشت به بالا</span>
-      <span id="i-share" class="info" style="display:none;">اشتراک‌گذاری</span>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -148,8 +148,8 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>  随着systemctl的出现，开机自启动脚本rc.local从archlinux上消失了；但有的时候我们也想在开机时（尤其是有root权限时）进行一些配置。<br>  我们可以把执行这样的一个脚本rc.local做成一个“服务”的形式，这样就可以同时使用systemctl和rc.local了。</p>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="1-编写服务文件"><a href="#1-编写服务文件" class="headerlink" title="1.编写服务文件"></a>1.编写服务文件</h3><p>  使用root权限新建一个服务脚本。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>/usr/lib/systemd/system/rc-local.service</span><br><span class="line">[Unit]</span><br><span class="line">Description="写下描述" </span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start #在这里你可以看到开机执行脚本的位置</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardInput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-编写开机执行脚本rc-local"><a href="#2-编写开机执行脚本rc-local" class="headerlink" title="2.编写开机执行脚本rc.local"></a>2.编写开机执行脚本rc.local</h3><p>  创建开机的shell脚本，这里用自动在虚拟机挂载共享文件夹为例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">mount -t vboxsf share /mnt/share # 你想执行的命令</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="1-编写服务文件"><a href="#1-编写服务文件" class="headerlink" title="1.编写服务文件"></a>1.编写服务文件</h3><p>  使用root权限新建一个服务脚本。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/usr/lib/systemd/system/rc-local.service</span></span><br><span class="line">[Unit]</span><br><span class="line">Description="写下描述" </span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/etc/rc.local start #在这里你可以看到开机执行脚本的位置</span><br><span class="line">TimeoutSec=0</span><br><span class="line">StandardInput=tty</span><br><span class="line">RemainAfterExit=yes</span><br><span class="line">SysVStartPriority=99</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-编写开机执行脚本rc-local"><a href="#2-编写开机执行脚本rc-local" class="headerlink" title="2.编写开机执行脚本rc.local"></a>2.编写开机执行脚本rc.local</h3><p>  创建开机的shell脚本，这里用自动在虚拟机挂载共享文件夹为例。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">mount -t vboxsf share /mnt/share # 你想执行的命令</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure></p>
 <h3 id="3-chmod和启动服务"><a href="#3-chmod和启动服务" class="headerlink" title="3.chmod和启动服务"></a>3.chmod和启动服务</h3><p>  我们已经编写好了两个文件，现在可以给予执行脚本x权限，并开启服务了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+x /etc/rc.local</span><br><span class="line">systemctl <span class="built_in">enable</span> rc-local.service</span><br></pre></td></tr></table></figure></p>
 <h3 id="4-重启"><a href="#4-重启" class="headerlink" title="4.重启"></a>4.重启</h3><p>  reboot即可。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  这次制作快捷开机脚本的目的是开机自动在虚拟机挂载共享文件夹，网上的很多教程都不够准确；出现了很多误导，比如：“自动挂载”反而必须打开而非关上，在genfstab文件末尾不能随意添加分区条目；这些错误的信息误导了很多人；实在使人感到遗憾。</p>
@@ -166,13 +166,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">خانه</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">درباره</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">نوشته‌ها</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">پروژه‌ها</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </div>
@@ -198,10 +198,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> منو</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> محتوا</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> اشتراک‌گذاری</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> بالا</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
     </div>
 
   </div>
@@ -210,19 +210,19 @@
         
         <footer id="footer">
   <div class="footer-left">
-    حق‌کپی &copy; 2019 jihandong
+    Copyright &copy; 2019 jihandong
   </div>
   <div class="footer-right">
     <nav>
       <ul>
          
-          <li><a href="/">خانه</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">درباره</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">نوشته‌ها</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">پروژه‌ها</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </nav>
