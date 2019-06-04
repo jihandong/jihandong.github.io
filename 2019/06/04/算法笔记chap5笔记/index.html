@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
 <meta property="og:description" content="这一章介绍涉及数学的算法题。 5.1简单数学  这节介绍了一个思路很有趣的题目：  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。  解决的方法是使用长度4的数组存储各位，准备一组转化函数array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-04T07:11:07.952Z">
+<meta property="og:updated_time" content="2019-06-04T07:12:28.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法笔记》chap5笔记">
 <meta name="twitter:description" content="这一章介绍涉及数学的算法题。 5.1简单数学  这节介绍了一个思路很有趣的题目：  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。  解决的方法是使用长度4的数组存储各位，准备一组转化函数array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时">
@@ -73,6 +73,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2019/06/04/算法笔记chap6笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2019/06/04/算法笔记chap4笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -101,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数‘"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数‘</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -147,7 +149,7 @@
   <div class="content" itemprop="articleBody">
     <p>  这一章介绍涉及数学的算法题。</p>
 <h2 id="5-1简单数学"><a href="#5-1简单数学" class="headerlink" title="5.1简单数学"></a>5.1简单数学</h2><p>  这节介绍了一个思路很有趣的题目：<br>  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。<br>  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。<br>  解决的方法是使用长度4的数组存储各位，<strong>准备一组转化函数</strong>array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时候可以在int形式下进行。</p>
-<h2 id="5-2最大公约数和最小公约数‘"><a href="#5-2最大公约数和最小公约数‘" class="headerlink" title="5.2最大公约数和最小公约数‘"></a>5.2最大公约数和最小公约数‘</h2><p>  只是起到工具书作用，忘记时查询；考试时带上实体书即可。</p>
+<h2 id="5-2最大公约数和最小公约数"><a href="#5-2最大公约数和最小公约数" class="headerlink" title="5.2最大公约数和最小公约数"></a>5.2最大公约数和最小公约数</h2><p>  只是起到工具书作用，忘记时查询；考试时带上实体书即可。</p>
 <p>  后面的内容大部分是《离散数学》当中的数学知识，对算法本身的要求并不高，所以跳过；不如带着机械工业的《离散数学》课本去考试。</p>
 
   </div>
@@ -174,7 +176,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数‘"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数‘</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
