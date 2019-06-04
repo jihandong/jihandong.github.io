@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="这一章介绍涉及数学的算法题。 5.1简单数学  这节介绍了一个思路很有趣的题目：  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。  解决的方法是使用长度4的数组存储各位，准备一组转化函数array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时">
+<meta name="keywords" content="algorihm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《算法笔记》chap5笔记">
+<meta property="og:url" content="http://yoursite.com/2019/06/04/算法笔记chap5笔记/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="这一章介绍涉及数学的算法题。 5.1简单数学  这节介绍了一个思路很有趣的题目：  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。  解决的方法是使用长度4的数组存储各位，准备一组转化函数array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-06-04T07:11:07.952Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《算法笔记》chap5笔记">
+<meta name="twitter:description" content="这一章介绍涉及数学的算法题。 5.1简单数学  这节介绍了一个思路很有趣的题目：  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。  解决的方法是使用长度4的数组存储各位，准备一组转化函数array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>《算法笔记》chap5笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/06/04/算法笔记chap4笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/04/算法笔记chap5笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&text=《算法笔记》chap5笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&is_video=false&description=《算法笔记》chap5笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《算法笔记》chap5笔记&body=Check out this article: http://yoursite.com/2019/06/04/算法笔记chap5笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&name=《算法笔记》chap5笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数‘"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数‘</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        《算法笔记》chap5笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-04T06:59:27.000Z" itemprop="datePublished">2019-06-04</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/algorihm/">algorihm</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>  这一章介绍涉及数学的算法题。</p>
+<h2 id="5-1简单数学"><a href="#5-1简单数学" class="headerlink" title="5.1简单数学"></a>5.1简单数学</h2><p>  这节介绍了一个思路很有趣的题目：<br>  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。<br>  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。<br>  解决的方法是使用长度4的数组存储各位，<strong>准备一组转化函数</strong>array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时候可以在int形式下进行。</p>
+<h2 id="5-2最大公约数和最小公约数‘"><a href="#5-2最大公约数和最小公约数‘" class="headerlink" title="5.2最大公约数和最小公约数‘"></a>5.2最大公约数和最小公约数‘</h2><p>  只是起到工具书作用，忘记时查询；考试时带上实体书即可。</p>
+<p>  后面的内容大部分是《离散数学》当中的数学知识，对算法本身的要求并不高，所以跳过；不如带着机械工业的《离散数学》课本去考试。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数‘"><span class="toc-number">2.</span> <span class="toc-text">5.2最大公约数和最小公约数‘</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/04/算法笔记chap5笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&text=《算法笔记》chap5笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&is_video=false&description=《算法笔记》chap5笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《算法笔记》chap5笔记&body=Check out this article: http://yoursite.com/2019/06/04/算法笔记chap5笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&title=《算法笔记》chap5笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/04/算法笔记chap5笔记/&name=《算法笔记》chap5笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
