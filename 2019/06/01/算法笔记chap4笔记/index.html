@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。 4.2散列4.2.1整数散列  散列是一种牺牲空间换取时间的算法策略，提前建立表格可以实现查询O(1)的复杂度">
+    <meta name="description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。  做题的关键仍在于比较函数cmp的设计，必须严格按照题目需求 4.2散列4.2.1整数散列  散列是一种牺牲空">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记chap4笔记">
+<meta property="og:title" content="《算法笔记》chap4笔记">
 <meta property="og:url" content="http://yoursite.com/2019/06/01/算法笔记chap4笔记/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
-<meta property="og:description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。 4.2散列4.2.1整数散列  散列是一种牺牲空间换取时间的算法策略，提前建立表格可以实现查询O(1)的复杂度">
+<meta property="og:description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。  做题的关键仍在于比较函数cmp的设计，必须严格按照题目需求 4.2散列4.2.1整数散列  散列是一种牺牲空">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-01T02:55:03.674Z">
+<meta property="og:updated_time" content="2019-06-04T05:48:50.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法笔记chap4笔记">
-<meta name="twitter:description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。 4.2散列4.2.1整数散列  散列是一种牺牲空间换取时间的算法策略，提前建立表格可以实现查询O(1)的复杂度">
+<meta name="twitter:title" content="《算法笔记》chap4笔记">
+<meta name="twitter:description" content="由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。 4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。  做题的关键仍在于比较函数cmp的设计，必须严格按照题目需求 4.2散列4.2.1整数散列  散列是一种牺牲空">
     
     
         
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>算法笔记chap4笔记</title>
+    <title>《算法笔记》chap4笔记</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -88,15 +88,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&text=算法笔记chap4笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&is_video=false&description=算法笔记chap4笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=算法笔记chap4笔记&body=Check out this article: http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&name=算法笔记chap4笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&text=《算法笔记》chap4笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&is_video=false&description=《算法笔记》chap4笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《算法笔记》chap4笔记&body=Check out this article: http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&name=《算法笔记》chap4笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -113,7 +113,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        算法笔记chap4笔记
+        《算法笔记》chap4笔记
     </h1>
 
 
@@ -146,13 +146,15 @@
 
   <div class="content" itemprop="articleBody">
     <p>  由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。</p>
-<h2 id="4-1排序"><a href="#4-1排序" class="headerlink" title="4.1排序"></a>4.1排序</h2><p>  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。</p>
+<h2 id="4-1排序"><a href="#4-1排序" class="headerlink" title="4.1排序"></a>4.1排序</h2><p>  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。<br>  <em>做题的关键仍在于比较函数cmp的设计，必须严格按照题目需求</em></p>
 <h2 id="4-2散列"><a href="#4-2散列" class="headerlink" title="4.2散列"></a>4.2散列</h2><h3 id="4-2-1整数散列"><a href="#4-2-1整数散列" class="headerlink" title="4.2.1整数散列"></a>4.2.1整数散列</h3><p>  散列是一种<strong>牺牲空间换取时间</strong>的算法策略，提前建立表格可以实现查询O(1)的复杂度；最普遍的额特点是直接把输入的数作为数组的下标。<br>  如果输入的不是正整数，比如字符串，就需要使用一个合理的<strong>hash函数</strong>将输入转化为下标。<br>  关于hash函数解决冲突有线性探查法、平方探查法、链地址法；6.4章将介绍自动解决冲突的map功能，一般不需要掌握解决冲突的方法。</p>
 <h3 id="4-2-2字符串hash初步"><a href="#4-2-2字符串hash初步" class="headerlink" title="4.2.2字符串hash初步"></a>4.2.2字符串hash初步</h3><p>  这里介绍一种对字符串hash的简单技巧，进阶内容在12.1节。<br>  <strong>将字符串看成一个X进制数，将其转化为10进制数即可作为数组下标</strong>（X视字符串中可能出现的字符种类决定），因为“指数增长”，所以这种方法要求字符串不能过长。</p>
+<p>  <em>把输入的数作为数组的下标是最常见的做法</em></p>
 <h2 id="4-3递归"><a href="#4-3递归" class="headerlink" title="4.3递归"></a>4.3递归</h2><p>  <strong>分治法（Divide &amp; Conquer）</strong>与递归密切相连，涉及问题分治、递归式求解、控制复杂度、主方法等知识，详见《算法导论》。</p>
 <h3 id="例：全排列问题"><a href="#例：全排列问题" class="headerlink" title="例：全排列问题"></a>例：全排列问题</h3><p>  生成n长度的全排列可以使用基于递归的分治法，n全排列=1开头的n全排列+2开头的n全排列+……+n开头的全排列。<br>  要点：判断是否已经使用某个整数，可以使用一个n长的HashTable来实现；在完成下一层递归之后，应当恢复HashTable中的值。</p>
 <h3 id="例：八皇后问题"><a href="#例：八皇后问题" class="headerlink" title="例：八皇后问题"></a>例：八皇后问题</h3><p>  八皇后问题可以转化为“全排列问题”，因为一个列（行）只能有一个皇后，所以我们只要记录皇后行（列）的排列顺序就可以表示一个皇后放置方案，只要在全排列内部加上斜线的条件即可。<br>  判断条件时，可以使用<strong>回溯法</strong>的技巧，即在到达递归边界前的某层，由于某些事实认为不需要再递归，便直接返回上一层，实现对递归树的“剪枝”。<br>  八皇后问题中，暴力法检查加入后每两个皇后间是否正确，复杂度O(n^2)；回溯法只检查新加入的皇后和之前每个皇后间是否正确，复杂度O(n)；</p>
-<h2 id="4-4贪心"><a href="#4-4贪心" class="headerlink" title="4.4贪心"></a>4.4贪心</h2>
+<h2 id="4-4贪心"><a href="#4-4贪心" class="headerlink" title="4.4贪心"></a>4.4贪心</h2><p>  局部最优策略，可以用反证法或数学归纳法尝试证明其全局最优（如果时间充足）。<br>  贪心策略成立的问题都必须满足<strong>最优子结构</strong>的特征，即问题的最优解可以用子问题的最优解构造出来（详见《算法导论》）。</p>
+
   </div>
 </article>
 
@@ -183,15 +185,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&text=算法笔记chap4笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&is_video=false&description=算法笔记chap4笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=算法笔记chap4笔记&body=Check out this article: http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=算法笔记chap4笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&name=算法笔记chap4笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&text=《算法笔记》chap4笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&is_video=false&description=《算法笔记》chap4笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=《算法笔记》chap4笔记&body=Check out this article: http://yoursite.com/2019/06/01/算法笔记chap4笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&title=《算法笔记》chap4笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/01/算法笔记chap4笔记/&name=《算法笔记》chap4笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
