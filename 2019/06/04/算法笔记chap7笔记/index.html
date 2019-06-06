@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。">
+    <meta name="description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。 7.2队列  同样非常水。 7.3链表  分配节点除了C的malloc，还可以使用C++的new；C++中的new可以当作一个关键字使用，与malloc的区别在于，申请内存空间失败后会出现异常。1int* p = new int; 总结  不是我故意水博客，这">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《算法笔记》chap7笔记 基本数据结构专题">
 <meta property="og:url" content="http://yoursite.com/2019/06/04/算法笔记chap7笔记/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
-<meta property="og:description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。">
+<meta property="og:description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。 7.2队列  同样非常水。 7.3链表  分配节点除了C的malloc，还可以使用C++的new；C++中的new可以当作一个关键字使用，与malloc的区别在于，申请内存空间失败后会出现异常。1int* p = new int; 总结  不是我故意水博客，这">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-05T01:49:38.839Z">
+<meta property="og:updated_time" content="2019-06-05T10:42:07.008Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法笔记》chap7笔记 基本数据结构专题">
-<meta name="twitter:description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。">
+<meta name="twitter:description" content="非常非常非常基础的数据结构：栈、队列、链表 7.1栈  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。 7.2队列  同样非常水。 7.3链表  分配节点除了C的malloc，还可以使用C++的new；C++中的new可以当作一个关键字使用，与malloc的区别在于，申请内存空间失败后会出现异常。1int* p = new int; 总结  不是我故意水博客，这">
     
     
         
@@ -73,6 +73,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2019/06/05/算法笔记chap8笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2019/06/04/算法笔记chap6笔记/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -101,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">1.</span> <span class="toc-text">7.1栈</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">1.</span> <span class="toc-text">7.1栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2队列"><span class="toc-number">2.</span> <span class="toc-text">7.2队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3链表"><span class="toc-number">3.</span> <span class="toc-text">7.3链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -147,6 +149,9 @@
   <div class="content" itemprop="articleBody">
     <p>  非常非常非常基础的数据结构：栈、队列、链表</p>
 <h2 id="7-1栈"><a href="#7-1栈" class="headerlink" title="7.1栈"></a>7.1栈</h2><p>  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。</p>
+<h2 id="7-2队列"><a href="#7-2队列" class="headerlink" title="7.2队列"></a>7.2队列</h2><p>  同样非常水。</p>
+<h2 id="7-3链表"><a href="#7-3链表" class="headerlink" title="7.3链表"></a>7.3链表</h2><p>  分配节点除了C的malloc，还可以使用C++的new；C++中的new可以当作一个关键字使用，与malloc的区别在于，申请内存空间失败后会出现异常。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  不是我故意水博客，这几章真的太水了。</p>
 
   </div>
 </article>
@@ -172,7 +177,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">1.</span> <span class="toc-text">7.1栈</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">1.</span> <span class="toc-text">7.1栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2队列"><span class="toc-number">2.</span> <span class="toc-text">7.2队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3链表"><span class="toc-number">3.</span> <span class="toc-text">7.3链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
