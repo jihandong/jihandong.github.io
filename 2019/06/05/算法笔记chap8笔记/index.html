@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。">
+    <meta name="description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。  DFS可以套用下面BFS的模板，区别只是把队列换成栈。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。这里有一个通用模板123456789void BFS(int s) &amp;#123;  queu">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《算法笔记》chap8笔记 搜索专题">
 <meta property="og:url" content="http://yoursite.com/2019/06/05/算法笔记chap8笔记/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
-<meta property="og:description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。">
+<meta property="og:description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。  DFS可以套用下面BFS的模板，区别只是把队列换成栈。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。这里有一个通用模板123456789void BFS(int s) &amp;#123;  queu">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-05T10:53:10.002Z">
+<meta property="og:updated_time" content="2019-06-06T06:34:41.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法笔记》chap8笔记 搜索专题">
-<meta name="twitter:description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。">
+<meta name="twitter:description" content="非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。 8.1深度优先搜索DFS  DFS可以用栈来实现，但是在程序设计上不如递归来得更方便。  DFS可以套用下面BFS的模板，区别只是把队列换成栈。 8.2广度优先搜索BFS  BFS很容易用一个队列来记录访问的节点。这里有一个通用模板123456789void BFS(int s) &amp;#123;  queu">
     
     
         
@@ -59,13 +59,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </span>
@@ -81,10 +81,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -148,8 +148,8 @@
 
   <div class="content" itemprop="articleBody">
     <p>  非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。</p>
-<h2 id="8-1深度优先搜索DFS"><a href="#8-1深度优先搜索DFS" class="headerlink" title="8.1深度优先搜索DFS"></a>8.1深度优先搜索DFS</h2><p>  DFS可以用<strong>栈</strong>来实现，但是在程序设计上不如递归来得更方便。</p>
-<h2 id="8-2广度优先搜索BFS"><a href="#8-2广度优先搜索BFS" class="headerlink" title="8.2广度优先搜索BFS"></a>8.2广度优先搜索BFS</h2><p>  BFS很容易用一个<strong>队列</strong>来记录访问的节点。</p>
+<h2 id="8-1深度优先搜索DFS"><a href="#8-1深度优先搜索DFS" class="headerlink" title="8.1深度优先搜索DFS"></a>8.1深度优先搜索DFS</h2><p>  DFS可以用<strong>栈</strong>来实现，但是在程序设计上不如递归来得更方便。<br>  DFS可以套用下面BFS的模板，区别只是把队列换成栈。</p>
+<h2 id="8-2广度优先搜索BFS"><a href="#8-2广度优先搜索BFS" class="headerlink" title="8.2广度优先搜索BFS"></a>8.2广度优先搜索BFS</h2><p>  BFS很容易用一个<strong>队列</strong>来记录访问的节点。这里有一个通用模板<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">  q.push(s);</span><br><span class="line">  <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">    <span class="comment">//访问队首元素</span></span><br><span class="line">    <span class="comment">//队首元素出队</span></span><br><span class="line">    <span class="comment">//下一层节点中未曾入队的节点加到队尾（未曾入队可以bool hash一下）</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
   </div>
 </article>
@@ -163,13 +163,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </div>
@@ -195,10 +195,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
     </div>
 
   </div>
@@ -213,13 +213,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </nav>

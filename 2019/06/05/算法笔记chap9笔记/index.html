@@ -15,7 +15,7 @@
 <meta property="og:description" content="9.1树与二叉树9.1.1树的定义与性质9.1.2树的递归定义9.1.3二叉树的存储结构和基本操作9.2二叉树的遍历  前三种遍历方式都可以使用递归实现，简单地调换顺序可以转换。 9.2.1先序遍历  root-&amp;gt;left-&amp;gt;right，其开头必然为root。 9.2.2中序遍历  left-&amp;gt;root-&amp;gt;right，如果能确定root，就可以得到左右子树。 9.2.3后序">
 <meta property="og:locale" content="Chinese">
 <meta property="og:image" content="http://yoursite.com/2019/06/05/算法笔记chap9笔记/921.png">
-<meta property="og:updated_time" content="2019-06-06T05:47:18.778Z">
+<meta property="og:updated_time" content="2019-06-06T05:54:15.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《算法笔记》chap9笔记 结构专题">
 <meta name="twitter:description" content="9.1树与二叉树9.1.1树的定义与性质9.1.2树的递归定义9.1.3二叉树的存储结构和基本操作9.2二叉树的遍历  前三种遍历方式都可以使用递归实现，简单地调换顺序可以转换。 9.2.1先序遍历  root-&amp;gt;left-&amp;gt;right，其开头必然为root。 9.2.2中序遍历  left-&amp;gt;root-&amp;gt;right，如果能确定root，就可以得到左右子树。 9.2.3后序">
@@ -61,13 +61,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </span>
@@ -81,10 +81,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -153,7 +153,13 @@
 <h3 id="9-2-3后序遍历"><a href="#9-2-3后序遍历" class="headerlink" title="9.2.3后序遍历"></a>9.2.3后序遍历</h3><p>  left-&gt;right-&gt;root，其<strong>结尾必然为root</strong>。</p>
 <h3 id="9-2-4层序遍历"><a href="#9-2-4层序遍历" class="headerlink" title="9.2.4层序遍历"></a>9.2.4层序遍历</h3><p>  和BFS相同，使用队列即可，其开头必然为root。</p>
 <h3 id="9-2-5二叉树的静态实现"><a href="#9-2-5二叉树的静态实现" class="headerlink" title="9.2.5二叉树的静态实现"></a>9.2.5二叉树的静态实现</h3><p>  没啥意义</p>
-<p>  中序遍历可以和先序、后序、层序中的任何一种结合构建出完整的二叉树；离开了中序遍历就无法构建二叉树，因为必须用中序遍历区分左子树和右子树。<br>  其中<strong>利用中序遍历和先序遍历还原二叉树</strong>的递归程序设计思路是非常清晰的，有很好的参考价值。<br><img src="/2019/06/05/算法笔记chap9笔记/921.png" title="中序遍历和先序遍历"><br>  递归：假设先序遍历和中序遍历的结果分别为<strong>[preL,preR]</strong>和<strong>[inL,inR]</strong>，我们知道先序遍历的首元素是root，在中序遍历中找到表示root的下标k时，就可以分辨出左子树和右子树；根据长度也可以分出先序遍历中的左子树和右子树。左子树的先序遍历和中序遍历为<strong>[preL+1,preL+k-inL]</strong>和<strong>[inL,k-1]</strong>；右子树的先序遍历和中序遍历为<strong>[preL+k-inL+1,preR]</strong>和<strong>[k+1,inR]&amp;</strong>，如此做就得到了两个子问题。<br>  初态：上面的递归终止时，必然是先序遍历长度为0时，这时已经从内部节点下降到了叶节点，二叉树不需要再补充了。</p>
+<p>  中序遍历可以和先序、后序、层序中的任何一种结合构建出完整的二叉树；离开了中序遍历就无法构建二叉树，因为必须用中序遍历区分左子树和右子树。<br>  其中<strong>利用中序遍历和先序遍历还原二叉树</strong>的递归程序设计思路是非常清晰的，有很好的参考价值。<br><img src="/2019/06/05/算法笔记chap9笔记/921.png" title="中序遍历和先序遍历"></p>
+<ol>
+<li>递归：假设先序遍历和中序遍历的区间分别为<strong>[preL,preR]</strong>和<strong>[inL,inR]</strong>，我们知道先序遍历的首元素是root，在中序遍历中找到表示root的下标k时，就可以分辨出左子树和右子树；根据长度也可以分出先序遍历中的左子树和右子树。左子树的先序遍历和中序遍历的区间为<strong>[preL+1,preL+k-inL]</strong>和<strong>[inL,k-1]</strong>；右子树的先序遍历和中序遍历的区间为<strong>[preL+k-inL+1,preR]</strong>和<strong>[k+1,inR]</strong>，如此做就得到了两个子问题。</li>
+<li><p>初态：上面的递归终止时，必然是先序遍历长度为0时，这时已经从内部节点下降到了叶节点，二叉树不需要再补充了。</p>
+<p>中序遍历和后序遍历还原二叉树也是类似的。</p>
+</li>
+</ol>
 <h2 id="9-3树的遍历"><a href="#9-3树的遍历" class="headerlink" title="9.3树的遍历"></a>9.3树的遍历</h2><h3 id="9-3-1树的静态写法"><a href="#9-3-1树的静态写法" class="headerlink" title="9.3.1树的静态写法"></a>9.3.1树的静态写法</h3><p>  这个静态写法还说得过去，多叉树实现在C++中指针域可以用vector。</p>
 <h3 id="9-3-2树的先序遍历"><a href="#9-3-2树的先序遍历" class="headerlink" title="9.3.2树的先序遍历"></a>9.3.2树的先序遍历</h3><p>  root-&gt;other childs</p>
 <h3 id="9-3-3树的层序遍历"><a href="#9-3-3树的层序遍历" class="headerlink" title="9.3.3树的层序遍历"></a>9.3.3树的层序遍历</h3><p>  本质上还是BFS，只要是图就行。</p>
@@ -173,13 +179,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </div>
@@ -205,10 +211,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
     </div>
 
   </div>
@@ -223,13 +229,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Inici</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="/about/">Qui som</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/projects_url">Projectes</a></li>
         
       </ul>
     </nav>
