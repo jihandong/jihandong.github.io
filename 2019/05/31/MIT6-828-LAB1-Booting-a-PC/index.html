@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/832.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/1001.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/31/MIT6-828-LAB1-Booting-a-PC/110F.png">
-<meta property="og:updated_time" content="2019-06-09T04:19:34.881Z">
+<meta property="og:updated_time" content="2019-06-09T05:06:15.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6.828:assignment1:LAB1">
 <meta name="twitter:description" content="Part1&amp;amp;2 ： 启动与boot loader  PC物理地址如下所示：1234567891011121314151617181920212223242526272829+------------------+  &amp;lt;- 0xFFFFFFFF (4GB)|      32-bit      ||  memory mapped   ||     devices      ||">
@@ -75,13 +75,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Accueil</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">A propos</a></li>
          
           <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projets</a></li>
         
       </ul>
     </span>
@@ -97,10 +97,10 @@
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">Article précédent</span>
+      <span id="i-next" class="info" style="display:none;">Article suivant</span>
+      <span id="i-top" class="info" style="display:none;">Retour au début</span>
+      <span id="i-share" class="info" style="display:none;">Partager cette article</span>
     </span>
     <br>
     <div id="share" style="display: none">
@@ -303,7 +303,7 @@
 <h3 id="Excercise10"><a href="#Excercise10" class="headerlink" title="Excercise10"></a>Excercise10</h3><p><strong>在obj/kernel.asm的test_backtrace设置一个断点，内核启动之后，每次调用它会发生什么？每次test_backtrace递归会在栈上放几个32位字？这些字是什么？（这个实验要求使用补丁版的QEMU，也就是我们之前手动编译的那个）</strong><br>  这就是开机时打印的那10行字符串，在递归底层调用了我们在Excercise8中一直在用的<code>mon_backtrace</code>函数。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/1001.png" title="相邻调用"><br>  发现每次调用<code>test_backtrace</code>，%ebp减少0x20，%esp也减少0x20，即压入了32个字节（8个32位字）；此外下层%ebp比上层%esp少4，这个间隔其实是被额外入栈的%ebp。</p>
 <h3 id="Excercise11"><a href="#Excercise11" class="headerlink" title="Excercise11"></a>Excercise11</h3><p><strong>实现要求的stack backtrace函数，用make grade检验代码结果</strong><br>  回去看看Lecture2的讲义，里面介绍了函数调用时栈的结构如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">       +------------+   |</span><br><span class="line">       | arg 2      |   \</span><br><span class="line">       +------------+    &gt;- previous function&apos;s stack frame</span><br><span class="line">       | arg 1      |   /</span><br><span class="line">       +------------+   |</span><br><span class="line">       | ret %eip   |   /</span><br><span class="line">       +============+   </span><br><span class="line">       | saved %ebp |   \</span><br><span class="line">%ebp-&gt; +------------+   |</span><br><span class="line">       |            |   |</span><br><span class="line">       |   local    |   \</span><br><span class="line">       | variables, |    &gt;- current function&apos;s stack frame</span><br><span class="line">       |    etc.    |   /</span><br><span class="line">       |            |   |</span><br><span class="line">       |            |   |</span><br><span class="line">%esp-&gt; +------------+   /</span><br></pre></td></tr></table></figure></p>
 <p>  ，可以看到当前的返回地址和传入参数都可以由%ebp确定。回忆一下，我们知道内核运行时会将%ebp设置为0，所以最上层的函数必然有%ebp==0，检测到这个条件说明我们已经到达了调用的最上层。<br>  实现上面的功能我们利用了inc/x86.h提供的方便函数<code>read_ebp</code>。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mon_backtrace</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// Your code here.</span></span><br><span class="line">	<span class="keyword">unsigned</span>* ebp = (<span class="keyword">unsigned</span>*) read_ebp();</span><br><span class="line">	<span class="keyword">uintptr_t</span> eip = *(ebp + <span class="number">1</span>);</span><br><span class="line">	cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">	<span class="keyword">while</span>(ebp != <span class="number">1</span>) &#123;</span><br><span class="line">		cprintf(<span class="string">"  ebp %08x  eip %08x  args"</span>, ebp, eip);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) cprintf(<span class="string">" %08x"</span>, *(ebp+i+<span class="number">2</span>));</span><br><span class="line">		cprintf(<span class="string">"\n"</span>); ;</span><br><span class="line">		ebp = (<span class="keyword">unsigned</span>*) *ebp;</span><br><span class="line">		eip = *(ebp + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Excercise12"><a href="#Excercise12" class="headerlink" title="Excercise12"></a>Excercise12</h3><p><strong>调整你的stack backtrace函数，使其能够显示函数名、源文件名、行号；还要添加一个命令到console monitor。（这样才可以得到满分，不过最重要的不是分数，是享受这个过程：）在debuginfo_eip()中，_STAB_来自哪里？</strong><br>  查看kern/kernel.ld，这是JOS内核的链接脚本，其中.stab和.stabstr段包含了符号信息，_STAB_必然是来自这里。<br>  使用命令<code>objdump -h obj/kern/kernel</code>可以显示各段的简单信息，G参数可以查看.stab（铺天盖地）的详细信息。最重要的是<code>gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c</code>得到的init.s汇编文件，里面可以看到init.c的.stabs信息，这对我们下面补充<code>debuginfo_eip()</code>有指导作用。<br>  分析kern/kdebug.c文件，其中提供了两个函数<code>stab_binsearch()</code>和<code>debuginfo_eip()</code>。<code>stab_binsearch()</code>可以在一堆stab中搜索特定地址和类型的stab项目。<code>debuginfo_eip()</code>多次调用上面的函数，依次锁定条目到文件名、函数名、行号；行号部分仿照前面的流程自己补充一下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code here.</span></span><br><span class="line"><span class="comment">// jhd:lline and rline have already been set</span></span><br><span class="line">stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line"><span class="keyword">if</span>(lline &lt;= rline) &#123;</span><br><span class="line">	<span class="comment">// stabs[lline] points to the line number</span></span><br><span class="line">	info-&gt;eip_line = stabs[lline].n_desc;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Excercise12"><a href="#Excercise12" class="headerlink" title="Excercise12"></a>Excercise12</h3><p><strong>调整你的stack backtrace函数，使其能够显示函数名、源文件名、行号；还要添加一个命令到console monitor。（这样才可以得到满分，不过最重要的不是分数，是享受这个过程：）在debuginfo_eip()中，_STAB_来自哪里？</strong><br>  查看kern/kernel.ld，这是JOS内核的链接脚本，其中.stab和.stabstr段包含了符号信息，_STAB_必然是来自这里。<br>  使用命令<code>objdump -h obj/kern/kernel</code>可以显示各段的简单信息，G参数可以查看.stab（铺天盖地）的详细信息。最重要的是<code>gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c</code>得到的init.s汇编文件，里面可以看到init.c的.stabs信息，这对我们下面补充<code>debuginfo_eip()</code>有指导作用。<br>  分析kern/kdebug.c文件，其中提供了两个函数<code>stab_binsearch()</code>和<code>debuginfo_eip()</code>。<code>stab_binsearch()</code>可以在一堆stab中搜索特定地址和类型的stab项目。<code>debuginfo_eip()</code>多次调用上面的函数，依次锁定条目到文件名、函数名、行号；行号部分的代码需要我们自己补充，值得注意的是uintptr_t这个类型指的是机器的“物理地址”，即在不同的机器上不同。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Your code here.</span></span><br><span class="line"><span class="comment">// jhd:lline and rline have already been set</span></span><br><span class="line">stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line"><span class="keyword">if</span>(lline &lt;= rline) &#123;</span><br><span class="line">	<span class="comment">// stabs[lline] points to the line number</span></span><br><span class="line">	info-&gt;eip_line = stabs[lline].n_desc;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure></p>
 <p>  补充的关键是确定行号的stab类型，以及行号储存在struct stab的哪个项目中。我们打开inc/stab.h，可以从注释中找到嫌疑类型N_SLINE；虽然struct stab的n_value项目最可疑，但是从init.s中我们发现N_SLINE条目似乎是把行号储存在n_desc项目中。<br>  最终我们修改一下程序：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mon_backtrace</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// Your code here.</span></span><br><span class="line">	<span class="keyword">unsigned</span>* ebp = (<span class="keyword">unsigned</span>*) read_ebp();</span><br><span class="line">	<span class="keyword">uintptr_t</span> eip = (<span class="keyword">uintptr_t</span>) *(ebp+<span class="number">1</span>);</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">	cprintf(<span class="string">"Stack backtrace:\n"</span>);</span><br><span class="line">	<span class="keyword">while</span>(ebp != <span class="number">0</span>) &#123;</span><br><span class="line">		debuginfo_eip(eip, &amp;info);</span><br><span class="line">		cprintf(<span class="string">"  ebp %08x  eip %08x  args"</span>, ebp, eip);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) cprintf(<span class="string">" %08x"</span>, *(ebp+i+<span class="number">2</span>));</span><br><span class="line">		cprintf(<span class="string">"\n%*.s%s:%d: "</span>, <span class="number">9</span>, <span class="string">""</span>, info.eip_file, info.eip_line);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; info.eip_fn_namelen; i++) cprintf(<span class="string">"%c"</span>, (info.eip_fn_name)[i]);</span><br><span class="line">		cprintf(<span class="string">"+%d\n"</span>, eip - (<span class="keyword">int</span>)info.eip_fn_addr);</span><br><span class="line">		ebp = (<span class="keyword">unsigned</span>*) *ebp;</span><br><span class="line">		eip = (<span class="keyword">uintptr_t</span>) *(ebp+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>  然后在kern/monitor.c中添加一个backtrace条目，就可以在命令行中调用了。<br><img src="/2019/05/31/MIT6-828-LAB1-Booting-a-PC/110F.png" title="最终结果"> </p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/" target="_blank" rel="noopener">MIT6.828 Lab1</a><br><a href="https://www.jianshu.com/p/84f62a05a7e6" target="_blank" rel="noopener">“找不到工作”的LAB1实验报告</a><br><a href="https://baike.baidu.com/item/ELF/7120560?fr=aladdin" target="_blank" rel="noopener">百度百科ELF</a></p>
@@ -320,13 +320,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Accueil</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">A propos</a></li>
          
           <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projets</a></li>
         
       </ul>
     </div>
@@ -352,10 +352,10 @@
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> Table des matière</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Partager</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Début</a>
     </div>
 
   </div>
@@ -370,13 +370,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Accueil</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">A propos</a></li>
          
           <li><a href="/archives/">Articles</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projets</a></li>
         
       </ul>
     </nav>
