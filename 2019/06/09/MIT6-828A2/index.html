@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/09/MIT6-828A2/E3.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/09/MIT6-828A2/E5.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/09/MIT6-828A2/E4.png">
-<meta property="og:updated_time" content="2019-06-09T10:52:19.000Z">
+<meta property="og:updated_time" content="2019-06-11T17:33:58.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6.828:assignment2:HW:boot xv6">
 <meta name="twitter:description" content="这只是一次作业，但是仍然有一些坑。 启动xv6  首先下载源码编译123mkdir 6.828cd 6.828git clone git://github.com/mit-pdos/xv6-public.git   这里有个坑：不能因为下载速度过慢转而下载zip文件，必须git clone，否则会导致编译无法进行。 找到地址  和之前类似的操作，在相应目录使用make qemu-gdb启动虚拟">
@@ -109,7 +109,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动xv6"><span class="toc-number">1.</span> <span class="toc-text">启动xv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#找到地址"><span class="toc-number">2.</span> <span class="toc-text">找到地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise-栈上是什么"><span class="toc-number">3.</span> <span class="toc-text">Excercise 栈上是什么</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动xv6"><span class="toc-number">1.</span> <span class="toc-text">启动xv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#找到地址"><span class="toc-number">2.</span> <span class="toc-text">找到地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise-栈上是什么"><span class="toc-number">3.</span> <span class="toc-text">Exercise 栈上是什么</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -158,7 +158,7 @@
 <p>  这里有个坑：不能因为下载速度过慢转而下载zip文件，必须git clone，否则会导致编译无法进行。</p>
 <h2 id="找到地址"><a href="#找到地址" class="headerlink" title="找到地址"></a>找到地址</h2><p>  和之前类似的操作，在相应目录使用<code>make qemu-gdb</code>启动虚拟机；然后在另一个终端打开gdb，此处出现没有找到启动的虚拟机的情况，根据提示在~/.gdbinit加入下面行。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add-auto-load-safe-path /home/jhd/6.828/xv6-public/.gdbinit</span><br></pre></td></tr></table></figure></p>
 <p>  从<code>make qemu-gdb</code>的输出信息和xv6-public/.gdbinit我们可以窥见gdb调试的原理，qemu-gdb通过26000端口与gdb进行通信。</p>
-<h2 id="Excercise-栈上是什么"><a href="#Excercise-栈上是什么" class="headerlink" title="Excercise 栈上是什么"></a>Excercise 栈上是什么</h2><p>  按照文档进行操作，打断点到0x10000c然后c过去。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info reg</span><br><span class="line">(gdb) x/24x <span class="variable">$esp</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Exercise-栈上是什么"><a href="#Exercise-栈上是什么" class="headerlink" title="Exercise 栈上是什么"></a>Exercise 栈上是什么</h2><p>  按照文档进行操作，打断点到0x10000c然后c过去。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info reg</span><br><span class="line">(gdb) x/24x <span class="variable">$esp</span></span><br></pre></td></tr></table></figure></p>
 <p>  最终显示了%esp指向及其上方24个32位字的信息，但是只有%ebp下的内容属于栈；所以只需分析前4行的信息。<br><img src="/2019/06/09/MIT6-828A2/E1.png" title="显示结果"><br>  根据文档提示，从0x7c00开始单步调试，记录对%esp及其相关内容的修改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0x7c43:		mov $0x7c00, %esp</span><br><span class="line">0x7c48:		call 0x7d28			#call bootmain</span><br></pre></td></tr></table></figure></p>
 <p>  之后直接进入bootblock.asm查看命令，可以看到在函数内开始部分，有ebp的保存，最后申请了0x2c的局部变量空间。<br><img src="/2019/06/09/MIT6-828A2/E2.png" title="bootmain函数的起始指令"><br>  在最后的一条call指令改变eip，将控制权完全交给内核。<br><img src="/2019/06/09/MIT6-828A2/E3.png" title="call指令改变eip"><br>  运行到此处，寄存器信息和栈信息如下所示，对比之前运行到0x10000c的信息我们很容易发现esp在call之后下降了4；而新压入的0x7db6就是call的下一条指令（返回地址）。<br><img src="/2019/06/09/MIT6-828A2/E5.png" title="call之前的栈信息"><br>  bootmain的内部，一直在调用<code>read_seg</code>读取页，需要修改%esp指向位置开始的3个参数；此外行342通过-0x1c(%ebp)保存eph，根据计算我们知道%ebp-0x1c==%esp+0x20。<br><img src="/2019/06/09/MIT6-828A2/E4.png" title="参数修改"><br>  综上所述栈的内容分析如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(%esp)		0x7db6		#调用内核的返回地址</span><br><span class="line">4(%esp)		0x100000	#readseg读最后一页的参数1</span><br><span class="line">8(%esp)		0x9516		#同上，参数2</span><br><span class="line">12(%esp)	0x1000		#同上，参数3</span><br><span class="line">32(%esp)	0x10054		#储存eph</span><br></pre></td></tr></table></figure></p>
 
@@ -186,7 +186,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动xv6"><span class="toc-number">1.</span> <span class="toc-text">启动xv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#找到地址"><span class="toc-number">2.</span> <span class="toc-text">找到地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excercise-栈上是什么"><span class="toc-number">3.</span> <span class="toc-text">Excercise 栈上是什么</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#启动xv6"><span class="toc-number">1.</span> <span class="toc-text">启动xv6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#找到地址"><span class="toc-number">2.</span> <span class="toc-text">找到地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exercise-栈上是什么"><span class="toc-number">3.</span> <span class="toc-text">Exercise 栈上是什么</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
