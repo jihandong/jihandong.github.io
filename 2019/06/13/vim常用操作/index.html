@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的vim操作">
+<meta property="og:url" content="http://yoursite.com/2019/06/13/vim常用操作/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-06-13T09:21:32.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我的vim操作">
+<meta name="twitter:description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>我的vim操作</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/06/09/MIT6-828A4/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/13/vim常用操作/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=我的vim操作"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=我的vim操作"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=我的vim操作&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=我的vim操作&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非常熟练的操作"><span class="toc-number">1.</span> <span class="toc-text">非常熟练的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有时忘记的操作"><span class="toc-number">2.</span> <span class="toc-text">有时忘记的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需要学习的操作"><span class="toc-number">3.</span> <span class="toc-text">需要学习的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        我的vim操作
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-13T08:48:58.000Z" itemprop="datePublished">2019-06-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/vim/">vim</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>  最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。<br>  有空或者有需要的时候就学1~2个新命令。<br>  插件这东西见仁见智，感觉配置起来浪费时间。</p>
+<h2 id="非常熟练的操作"><a href="#非常熟练的操作" class="headerlink" title="非常熟练的操作"></a>非常熟练的操作</h2><p>  烂熟了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">i			<span class="comment">#插入模式</span></span><br><span class="line">:q			<span class="comment">#退出</span></span><br><span class="line">:w			<span class="comment">#保存，wq可以合在一起，就变成保存退出；加!就强制执行|</span></span><br><span class="line">yy			<span class="comment">#行复制</span></span><br><span class="line">dd			<span class="comment">#行剪切</span></span><br><span class="line">p			<span class="comment">#粘贴</span></span><br><span class="line">100G		<span class="comment">#跳到第100行</span></span><br><span class="line">.			<span class="comment">#上一条命令</span></span><br><span class="line">/			<span class="comment">#接正则表达式向下匹配</span></span><br></pre></td></tr></table></figure></p>
+<p>此外<strong>尝试用hjkl代替方向键</strong>（对我来说是比较困难的一件事）。</p>
+<h2 id="有时忘记的操作"><a href="#有时忘记的操作" class="headerlink" title="有时忘记的操作"></a>有时忘记的操作</h2><p>  最近得复习回想起来的命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">u				<span class="comment">#undo</span></span><br><span class="line">ctrl+r			<span class="comment">#redo</span></span><br><span class="line">:e	filename	<span class="comment">#打开文件filename</span></span><br><span class="line">:bp				<span class="comment">#打开的上个文件，past</span></span><br><span class="line">:bn				<span class="comment">#打开的下个文件，next</span></span><br><span class="line">ctrl+n			<span class="comment">#自动补全</span></span><br><span class="line">ctrl+p			<span class="comment">#自动补全</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="需要学习的操作"><a href="#需要学习的操作" class="headerlink" title="需要学习的操作"></a>需要学习的操作</h2><p>  有必要学习的命令队列<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.				<span class="comment">#上一条命令</span></span><br><span class="line">w				<span class="comment">#跳到下个单词开始</span></span><br><span class="line">e				<span class="comment">#跳到下个单词结束</span></span><br><span class="line">dt<span class="string">"				#删除到双引号</span></span><br><span class="line"><span class="string">v				#可视化</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/chengjiawei/p/9339951.html" target="_blank" rel="noopener">某人博客</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非常熟练的操作"><span class="toc-number">1.</span> <span class="toc-text">非常熟练的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有时忘记的操作"><span class="toc-number">2.</span> <span class="toc-text">有时忘记的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需要学习的操作"><span class="toc-number">3.</span> <span class="toc-text">需要学习的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/13/vim常用操作/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=我的vim操作"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=我的vim操作"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=我的vim操作&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=我的vim操作&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
