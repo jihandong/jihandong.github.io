@@ -9,14 +9,14 @@
     <meta name="description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
 <meta name="keywords" content="vim">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的vim操作">
+<meta property="og:title" content="vim操作备查">
 <meta property="og:url" content="http://yoursite.com/2019/06/13/vim常用操作/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
 <meta property="og:description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-06-13T09:21:32.481Z">
+<meta property="og:updated_time" content="2019-06-15T10:38:33.021Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的vim操作">
+<meta name="twitter:title" content="vim操作备查">
 <meta name="twitter:description" content="最近在没有图形界面的archlinux上做6.828，使用vim时发现自己连取消撤回都不会；感觉有必要提高一下对vim的熟练度，但是没有必要刻意话时间训练vim，所以忘记了重要的命令，或者想熟练某个命令，就记录在这里。  有空或者有需要的时候就学1~2个新命令。  插件这东西见仁见智，感觉配置起来浪费时间。 非常熟练的操作  烂熟了。123456789i			#插入模式:q			#退出:w">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>我的vim操作</title>
+    <title>vim操作备查</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -59,13 +59,13 @@
     <span id="nav">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </span>
@@ -73,30 +73,32 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2019/06/28/mit6-828A7/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/2019/06/09/MIT6-828A4/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
-      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
-      <span id="i-next" class="info" style="display:none;">Post Següent</span>
-      <span id="i-top" class="info" style="display:none;">Adalt</span>
-      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
     </span>
     <br>
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/13/vim常用操作/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=我的vim操作"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=我的vim操作"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=我的vim操作&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=我的vim操作&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=vim操作备查"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=vim操作备查"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim操作备查&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=vim操作备查&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -113,7 +115,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        我的vim操作
+        vim操作备查
     </h1>
 
 
@@ -164,13 +166,13 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </div>
@@ -182,24 +184,24 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/06/13/vim常用操作/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=我的vim操作"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=我的vim操作"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=我的vim操作&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=我的vim操作"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=我的vim操作&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/06/13/vim常用操作/&text=vim操作备查"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/06/13/vim常用操作/&is_video=false&description=vim操作备查"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=vim操作备查&body=Check out this article: http://yoursite.com/2019/06/13/vim常用操作/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/06/13/vim常用操作/&title=vim操作备查"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/06/13/vim常用操作/&name=vim操作备查&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
 
     <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
         <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
     </div>
 
   </div>
@@ -214,13 +216,13 @@
     <nav>
       <ul>
          
-          <li><a href="/">Inici</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="/about/">Qui som</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Articles</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/projects_url">Projectes</a></li>
+          <li><a href="/projects_url">Projects</a></li>
         
       </ul>
     </nav>
