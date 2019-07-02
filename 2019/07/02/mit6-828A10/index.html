@@ -9,14 +9,14 @@
     <meta name="description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
 <meta name="keywords" content="MIT6.828,OS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mit6.828A10抢占式多任务">
+<meta property="og:title" content="MIT6.828:assignment10:LAB4抢占式多任务">
 <meta property="og:url" content="http://yoursite.com/2019/07/02/mit6-828A10/index.html">
 <meta property="og:site_name" content="JiHandong&#39;s Blog">
 <meta property="og:description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-07-02T13:55:16.721Z">
+<meta property="og:updated_time" content="2019-07-02T16:33:46.725Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mit6.828A10抢占式多任务">
+<meta name="twitter:title" content="MIT6.828:assignment10:LAB4抢占式多任务">
 <meta name="twitter:description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>mit6.828A10抢占式多任务</title>
+    <title>MIT6.828:assignment10:LAB4抢占式多任务</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -90,15 +90,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=mit6.828A10抢占式多任务"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=mit6.828A10抢占式多任务"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=mit6.828A10抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=mit6.828A10抢占式多任务&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828:assignment10:LAB4抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=MIT6.828:assignment10:LAB4抢占式多任务&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -115,7 +115,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        mit6.828A10抢占式多任务
+        MIT6.828:assignment10:LAB4抢占式多任务
     </h1>
 
 
@@ -151,13 +151,13 @@
 <h2 id="PartA-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#PartA-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="PartA Multiprocessor Support and Cooperative Multitasking"></a>PartA Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>  目标是实现symmetric multiprocessing（SMP，对称多处理）。<br>  SMP中所有的CPU视作相同，共享计算机资源；但是在启动阶段，将他们分成两类：</p>
 <ol>
 <li>bootstrap processor（BSP），负责初始化和引导OS；</li>
-<li>application processor（APs），在OS运行之后由BSP激活，具体使用哪个BSP由硬件和BIOS决定。<br>SMP系统中，每个CPU都有附带的local APIC unit（LAPIC），其负责在整个系统中提供中断，并提供唯一的标识符，本实验中使用LAPIC的如下基本功能：</li>
+<li>application processor（APs），在OS运行之后由BSP激活，具体使用哪个BSP由硬件和BIOS决定。<br> SMP系统中，每个CPU都有附带的local APIC unit（LAPIC），其负责在整个系统中提供中断，并提供唯一的标识符，本实验中使用LAPIC的如下基本功能：</li>
 </ol>
 <ul>
 <li>使用<code>cpunum()</code>阅读LAPIC ID判断正在运行的CPU</li>
 <li>使用<code>lapic_startap()</code>从BSP向APs发送中断（IPI）以启动其他CPU</li>
 <li><p>使用<code>apic_init()</code>编写LAPIC的内置定时器触发时钟中断，以支持抢占式多任务</p>
-<p>处理器通过memory-mapped I/O（MMIO）访问LAPIC，MMIO中有一部分直接硬链接到physical memory，所以可以使用原本访问内存的load/store instruction访问I/O device寄存器，</p>
+<p>处理器通过memory-mapped I/O（MMIO）访问LAPIC，MMIO中有一部分直接硬链接到physical memory，所以可以使用原本访问内存的load/store instruction访问I/O device寄存器， （如：物理地址0xA0000有一个I/O hole，准备给VGA）LAPIC位于物理地址0xFE000000（32MB short of 4GB），JOS在MMIOBASE有一个4MB的gap， 后面的实验会介绍更多的MMIO regions，现在需要编写一个simple function to allocate space from this region and map device memory to it.</p>
 </li>
 </ul>
 <h4 id="Exercise1"><a href="#Exercise1" class="headerlink" title="Exercise1"></a>Exercise1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">实现kern/pmap.c中的mmio_map_region()。</span><br><span class="line">kern/lapic.c中lapic_init的开头有显示如何使用这个函数</span><br><span class="line">You&apos;ll have to do the next exercise, too, before the tests for mmio_map_region will run.</span><br></pre></td></tr></table></figure>
@@ -192,15 +192,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=mit6.828A10抢占式多任务"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=mit6.828A10抢占式多任务"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=mit6.828A10抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=mit6.828A10抢占式多任务&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MIT6.828:assignment10:LAB4抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=MIT6.828:assignment10:LAB4抢占式多任务"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=MIT6.828:assignment10:LAB4抢占式多任务&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
