@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="将所有笔记整合为一篇文章。   由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。  第四章是一些算法基础，4.1、4.2的题目比较多，其他节的题目较少；整体难度较低。做过几题熟悉了一下容易犯的错误就准备下一章了。 chap4算法基础4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的">
+<meta name="keywords" content="algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法笔记笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/算法笔记/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="将所有笔记整合为一篇文章。   由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。  第四章是一些算法基础，4.1、4.2的题目比较多，其他节的题目较少；整体难度较低。做过几题熟悉了一下容易犯的错误就准备下一章了。 chap4算法基础4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://yoursite.com/2019/07/03/算法笔记/921.png">
+<meta property="og:updated_time" content="2019-07-02T16:31:51.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法笔记笔记">
+<meta name="twitter:description" content="将所有笔记整合为一篇文章。   由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。  第四章是一些算法基础，4.1、4.2的题目比较多，其他节的题目较少；整体难度较低。做过几题熟悉了一下容易犯的错误就准备下一章了。 chap4算法基础4.1排序  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/03/算法笔记/921.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>算法笔记笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/07/02/mit6-828A10/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/03/算法笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/03/算法笔记/&text=算法笔记笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/03/算法笔记/&is_video=false&description=算法笔记笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=算法笔记笔记&body=Check out this article: http://yoursite.com/2019/07/03/算法笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/03/算法笔记/&name=算法笔记笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#chap4算法基础"><span class="toc-number">1.</span> <span class="toc-text">chap4算法基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1排序"><span class="toc-number">1.1.</span> <span class="toc-text">4.1排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2散列"><span class="toc-number">1.2.</span> <span class="toc-text">4.2散列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1整数散列"><span class="toc-number">1.2.1.</span> <span class="toc-text">4.2.1整数散列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2字符串hash初步"><span class="toc-number">1.2.2.</span> <span class="toc-text">4.2.2字符串hash初步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3递归"><span class="toc-number">1.3.</span> <span class="toc-text">4.3递归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例：全排列问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">例：全排列问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例：八皇后问题"><span class="toc-number">1.3.2.</span> <span class="toc-text">例：八皇后问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4贪心"><span class="toc-number">1.4.</span> <span class="toc-text">4.4贪心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5二分"><span class="toc-number">1.5.</span> <span class="toc-text">4.5二分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1整数二分"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.5.1整数二分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2二分拓展"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.5.2二分拓展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3快速幂"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.5.3快速幂</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6two-pointers"><span class="toc-number">1.6.</span> <span class="toc-text">4.6two pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7其他高效技巧"><span class="toc-number">1.7.</span> <span class="toc-text">4.7其他高效技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-1打表"><span class="toc-number">1.7.1.</span> <span class="toc-text">4.7.1打表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-2活用递推"><span class="toc-number">1.7.2.</span> <span class="toc-text">4.7.2活用递推</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-3随机选择算法"><span class="toc-number">1.7.3.</span> <span class="toc-text">4.7.3随机选择算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap5数学题"><span class="toc-number">2.</span> <span class="toc-text">chap5数学题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">2.1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数"><span class="toc-number">2.2.</span> <span class="toc-text">5.2最大公约数和最小公约数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap6C-的STL"><span class="toc-number">3.</span> <span class="toc-text">chap6C++的STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-vector"><span class="toc-number">3.1.</span> <span class="toc-text">6.1 vector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-set"><span class="toc-number">3.2.</span> <span class="toc-text">6.2 set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-string"><span class="toc-number">3.3.</span> <span class="toc-text">6.3 string</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-map"><span class="toc-number">3.4.</span> <span class="toc-text">6.4 map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-queue"><span class="toc-number">3.5.</span> <span class="toc-text">6.5 queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-6-priority-queue"><span class="toc-number">3.6.</span> <span class="toc-text">6.6 priority_queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-stack"><span class="toc-number">3.7.</span> <span class="toc-text">6.7 stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-pair"><span class="toc-number">3.8.</span> <span class="toc-text">6.8 pair</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-9-algorithm下的常用函数"><span class="toc-number">3.9.</span> <span class="toc-text">6.9 algorithm下的常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.10.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap7基础数据结构"><span class="toc-number">4.</span> <span class="toc-text">chap7基础数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">4.1.</span> <span class="toc-text">7.1栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2队列"><span class="toc-number">4.2.</span> <span class="toc-text">7.2队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3链表"><span class="toc-number">4.3.</span> <span class="toc-text">7.3链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结-1"><span class="toc-number">4.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap8搜索专题"><span class="toc-number">5.</span> <span class="toc-text">chap8搜索专题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1深度优先搜索DFS"><span class="toc-number">5.1.</span> <span class="toc-text">8.1深度优先搜索DFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2广度优先搜索BFS"><span class="toc-number">5.2.</span> <span class="toc-text">8.2广度优先搜索BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chap9结构专题"><span class="toc-number">5.3.</span> <span class="toc-text">chap9结构专题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1树与二叉树"><span class="toc-number">5.4.</span> <span class="toc-text">9.1树与二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1树的定义与性质"><span class="toc-number">5.4.1.</span> <span class="toc-text">9.1.1树的定义与性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2树的递归定义"><span class="toc-number">5.4.2.</span> <span class="toc-text">9.1.2树的递归定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-3二叉树的存储结构和基本操作"><span class="toc-number">5.4.3.</span> <span class="toc-text">9.1.3二叉树的存储结构和基本操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2二叉树的遍历"><span class="toc-number">5.5.</span> <span class="toc-text">9.2二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-1先序遍历"><span class="toc-number">5.5.1.</span> <span class="toc-text">9.2.1先序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-2中序遍历"><span class="toc-number">5.5.2.</span> <span class="toc-text">9.2.2中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-3后序遍历"><span class="toc-number">5.5.3.</span> <span class="toc-text">9.2.3后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-4层序遍历"><span class="toc-number">5.5.4.</span> <span class="toc-text">9.2.4层序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-5二叉树的静态实现"><span class="toc-number">5.5.5.</span> <span class="toc-text">9.2.5二叉树的静态实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3树的遍历"><span class="toc-number">5.6.</span> <span class="toc-text">9.3树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-1树的静态写法"><span class="toc-number">5.6.1.</span> <span class="toc-text">9.3.1树的静态写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-2树的先序遍历"><span class="toc-number">5.6.2.</span> <span class="toc-text">9.3.2树的先序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-3树的层序遍历"><span class="toc-number">5.6.3.</span> <span class="toc-text">9.3.3树的层序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-4从树的遍历看DFS和BFS"><span class="toc-number">5.6.4.</span> <span class="toc-text">9.3.4从树的遍历看DFS和BFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4二叉查找树BST"><span class="toc-number">5.7.</span> <span class="toc-text">9.4二叉查找树BST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1BST定义"><span class="toc-number">5.7.1.</span> <span class="toc-text">9.4.1BST定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2BST基本操作"><span class="toc-number">5.7.2.</span> <span class="toc-text">9.4.2BST基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-3BST性质"><span class="toc-number">5.7.3.</span> <span class="toc-text">9.4.3BST性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5平衡二叉树AVL"><span class="toc-number">5.8.</span> <span class="toc-text">9.5平衡二叉树AVL</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        算法笔记笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-02T16:17:16.000Z" itemprop="datePublished">2019-07-03</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/algorithm/">algorithm</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>  将所有笔记整合为一篇文章。</p>
+<p>  由于得罪了一名专业课老师，加权受到了不小的冲击；为了保护自己的保研资格，必须开始准备9月份的CSP认证。<br>  第四章是一些算法基础，4.1、4.2的题目比较多，其他节的题目较少；整体难度较低。做过几题熟悉了一下容易犯的错误就准备下一章了。</p>
+<h1 id="chap4算法基础"><a href="#chap4算法基础" class="headerlink" title="chap4算法基础"></a>chap4算法基础</h1><h2 id="4-1排序"><a href="#4-1排序" class="headerlink" title="4.1排序"></a>4.1排序</h2><p>  排序有很多种，从简单的选择排序、插入排序到归并排序、随机排序，但是使用C++时只要使用STL的sort就好。关键点在于利用好sort的第三个参数——自定义比较函数。<br>  <em>做题的关键仍在于比较函数cmp的设计，必须严格按照题目需求</em></p>
+<h2 id="4-2散列"><a href="#4-2散列" class="headerlink" title="4.2散列"></a>4.2散列</h2><h3 id="4-2-1整数散列"><a href="#4-2-1整数散列" class="headerlink" title="4.2.1整数散列"></a>4.2.1整数散列</h3><p>  散列是一种<strong>牺牲空间换取时间</strong>的算法策略，提前建立表格可以实现查询O(1)的复杂度；最普遍的额特点是直接把输入的数作为数组的下标。<br>  如果输入的不是正整数，比如字符串，就需要使用一个合理的<strong>hash函数</strong>将输入转化为下标。<br>  关于hash函数解决冲突有线性探查法、平方探查法、链地址法；6.4章将介绍自动解决冲突的map功能，一般不需要掌握解决冲突的方法。</p>
+<h3 id="4-2-2字符串hash初步"><a href="#4-2-2字符串hash初步" class="headerlink" title="4.2.2字符串hash初步"></a>4.2.2字符串hash初步</h3><p>  这里介绍一种对字符串hash的简单技巧，进阶内容在12.1节。<br>  <strong>将字符串看成一个X进制数，将其转化为10进制数即可作为数组下标</strong>（X视字符串中可能出现的字符种类决定），因为“指数增长”，所以这种方法要求字符串不能过长。<br>  <em>把输入的数作为数组的下标是最常见的做法</em><br>  <em>bool哈希表可以用来表示“是否”，int哈希表可以用来计数，要求输入数字的上限不是太大</em><br>  <em>需要哈希函数的时候很容易在某些地方忘记这层映射</em></p>
+<h2 id="4-3递归"><a href="#4-3递归" class="headerlink" title="4.3递归"></a>4.3递归</h2><p>  <strong>分治法（Divide &amp; Conquer）</strong>与递归密切相连，涉及问题分治、递归式求解、控制复杂度、主方法等知识，详见《算法导论》。</p>
+<h3 id="例：全排列问题"><a href="#例：全排列问题" class="headerlink" title="例：全排列问题"></a>例：全排列问题</h3><p>  生成n长度的全排列可以使用基于递归的分治法，n全排列=1开头的n全排列+2开头的n全排列+……+n开头的全排列。<br>  要点：判断是否已经使用某个整数，可以使用一个n长的HashTable来实现；在完成下一层递归之后，应当恢复HashTable中的值。</p>
+<h3 id="例：八皇后问题"><a href="#例：八皇后问题" class="headerlink" title="例：八皇后问题"></a>例：八皇后问题</h3><p>  八皇后问题可以转化为“全排列问题”，因为一个列（行）只能有一个皇后，所以我们只要记录皇后行（列）的排列顺序就可以表示一个皇后放置方案，只要在全排列内部加上斜线的条件即可。<br>  判断条件时，可以使用<strong>回溯法</strong>的技巧，即在到达递归边界前的某层，由于某些事实认为不需要再递归，便直接返回上一层，实现对递归树的“剪枝”。<br>  八皇后问题中，暴力法检查加入后每两个皇后间是否正确，复杂度O(n^2)；回溯法只检查新加入的皇后和之前每个皇后间是否正确，复杂度O(n)；</p>
+<h2 id="4-4贪心"><a href="#4-4贪心" class="headerlink" title="4.4贪心"></a>4.4贪心</h2><p>  局部最优策略，可以用反证法或数学归纳法尝试证明其全局最优（如果时间充足）。<br>  贪心策略成立的问题都必须满足<strong>最优子结构</strong>的特征，即问题的最优解可以用子问题的最优解构造出来（详见《算法导论》）。</p>
+<h2 id="4-5二分"><a href="#4-5二分" class="headerlink" title="4.5二分"></a>4.5二分</h2><h3 id="4-5-1整数二分"><a href="#4-5-1整数二分" class="headerlink" title="4.5.1整数二分"></a>4.5.1整数二分</h3><h3 id="4-5-2二分拓展"><a href="#4-5-2二分拓展" class="headerlink" title="4.5.2二分拓展"></a>4.5.2二分拓展</h3><p>  SICP中介绍了使用二分思想解决x^2=a，可以使用x与a/x求平均的方式，使其值“稳定”下来。</p>
+<h3 id="4-5-3快速幂"><a href="#4-5-3快速幂" class="headerlink" title="4.5.3快速幂"></a>4.5.3快速幂</h3><p>  曾用于斐波那契数列O(lgn)的计算当中，对幂使用二分法技巧。</p>
+<h2 id="4-6two-pointers"><a href="#4-6two-pointers" class="headerlink" title="4.6two pointers"></a>4.6two pointers</h2><p>  本身并不是一种算法，而是一种编程技巧。<br>  “使用因为题目条件而互相牵连的两个指针，减少一些冗余的迭代次数”，归并排序和快速排序使用了这种技巧，让时间复杂度从O(n^2)降低为O(nlgn)。</p>
+<h2 id="4-7其他高效技巧"><a href="#4-7其他高效技巧" class="headerlink" title="4.7其他高效技巧"></a>4.7其他高效技巧</h2><h3 id="4-7-1打表"><a href="#4-7-1打表" class="headerlink" title="4.7.1打表"></a>4.7.1打表</h3><p>  提前计算部分结果存储在表中，用空间换时间；用预处理减少单次查询时间。</p>
+<h3 id="4-7-2活用递推"><a href="#4-7-2活用递推" class="headerlink" title="4.7.2活用递推"></a>4.7.2活用递推</h3><p>  找到题目中隐含的递推关系，改变题目形式；比如：“一个字符串中从左至右组成PAT的个数”&lt;=&gt;“计算一个字符串中每个A左侧P数量和右侧T数量的乘积的和”。</p>
+<h3 id="4-7-3随机选择算法"><a href="#4-7-3随机选择算法" class="headerlink" title="4.7.3随机选择算法"></a>4.7.3随机选择算法</h3><p>  详见《算法导论》，例子是“求一组数字中第K大的数字”通过随机的分治法可以将<strong>期望时间复杂度</strong>降低为O(n)。 </p>
+<h1 id="chap5数学题"><a href="#chap5数学题" class="headerlink" title="chap5数学题"></a>chap5数学题</h1><h2 id="5-1简单数学"><a href="#5-1简单数学" class="headerlink" title="5.1简单数学"></a>5.1简单数学</h2><p>  这节介绍了一个思路很有趣的题目：<br>  例：“6174黑洞”，对一个输入的4位正整数，给出得到6174的步骤中的算式。<br>  这个题目的关键是格式化地输入减法算式，中途还需要调换4位数字的顺序。<br>  解决的方法是使用长度4的数组存储各位，<strong>准备一组转化函数</strong>array2int和int2array；这样需要调换顺序时可以在array形式下sort；需要做减法的时候可以在int形式下进行。</p>
+<h2 id="5-2最大公约数和最小公约数"><a href="#5-2最大公约数和最小公约数" class="headerlink" title="5.2最大公约数和最小公约数"></a>5.2最大公约数和最小公约数</h2><p>  只是起到工具书作用，忘记时查询；考试时带上实体书即可。</p>
+<p>  后面的内容大部分是《离散数学》当中的数学知识，对算法本身的要求并不高，所以跳过；不如带着机械工业的《离散数学》课本去考试。</p>
+<h1 id="chap6C-的STL"><a href="#chap6C-的STL" class="headerlink" title="chap6C++的STL"></a>chap6C++的STL</h1><p>  这一节的任务是熟悉一些方便的STL容器，与python中的list、map等功能类似；可谓磨刀不误砍柴工，熟练使用各种容器可以让编写高难度算法时忽略繁杂的细节。</p>
+<h2 id="6-1-vector"><a href="#6-1-vector" class="headerlink" title="6.1 vector"></a>6.1 vector</h2><p>  使用<code>vector&lt;sometype&gt; v；</code>表示vector类型；需要头文件<code>vector</code>。<br>  变长数组，仍可以用<code>v[i]</code>的形式访问里面的元素。<br>  常用的几个方法是<code>begin()</code>、<code>end()</code>、<code>size()</code>、<code>push_back()</code>。<br>  此外尤其值得一提的是如果需要对vector中的元素进行排序，只需要简单地一行：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort(v.begin(), v.end());</span><br></pre></td></tr></table></figure></p>
+<p>  还可以作为存储图的<strong>邻接表</strong>，10.2.2介绍。</p>
+<h2 id="6-2-set"><a href="#6-2-set" class="headerlink" title="6.2 set"></a>6.2 set</h2><p>  适合要求元素不能重复，或因元素过大或不易转化为整数而<strong>无法开哈希表</strong>的情况；可以做到自动去重并升序排序。<br>  与vector和string不同，只能使用<code>set&lt;int&gt;::iterator it = s.begin()</code>和<code>*it</code>的形式对集合中的元素访问；所以遍历的方式应当为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it = S[P1].begin(); it != S.end(); it++) &#123;</span><br></pre></td></tr></table></figure></p>
+<p>  注意<strong>不要滥用集合</strong>，只需要知道集合大小的时候不用特意设置一个集合，只要合理计数就可以，因为集合的基本操作<code>insert()</code>是比较“贵”的（需要O(lgn)）。<br>  <strong>考CSP时一定要带一本STL工具书</strong></p>
+<h2 id="6-3-string"><a href="#6-3-string" class="headerlink" title="6.3 string"></a>6.3 string</h2><p>  string封装了一些字符串的功能，也保留了原来的字符数组式的访问功能；让字符串操作变得更加简洁了。<br>  和vector类似可以在迭代器上加减来访问；<br>  string只能通过cin和cout来输入输出，如果需要使用printf应该使用下面的形式：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%s"</span>, str.c_str());</span><br></pre></td></tr></table></figure></p>
+<p>  由于重载过运算符，所以可以用<code>+=</code>拼接字符串；用各种比较运算符比较字符串；还可以使用各种容器都有的<code>erase()</code>、<code>size()</code>、<code>insert()</code>、<code>clear()</code>等功能。<br>  比较特别的还有<code>substr()</code>可以得到子串；<code>replace()</code>可以修改部分字符串；</p>
+<h2 id="6-4-map"><a href="#6-4-map" class="headerlink" title="6.4 map"></a>6.4 map</h2><p>  建立一种基本类型到另一种基本类型的映射，比如之前的字符串hash，使用map会方便许多。<br>  使用<code>map&lt;keytype, valuetype&gt; mp</code>声明mp，中间指明键类型和值类型。<br>  可以用<strong>下标</strong>访问，赋值时只要当作一个没有边界的数组即可；也可以用<strong>迭代器</strong>访问，map会自动以键从小到大的顺序自动排列。</p>
+<p>  6.5~6.7结合chap7一起看</p>
+<h2 id="6-5-queue"><a href="#6-5-queue" class="headerlink" title="6.5 queue"></a>6.5 queue</h2><h2 id="6-6-priority-queue"><a href="#6-6-priority-queue" class="headerlink" title="6.6 priority_queue"></a>6.6 priority_queue</h2><h2 id="6-7-stack"><a href="#6-7-stack" class="headerlink" title="6.7 stack"></a>6.7 stack</h2><h2 id="6-8-pair"><a href="#6-8-pair" class="headerlink" title="6.8 pair"></a>6.8 pair</h2><p>  一个实用的小工具，简化了一段结构代码；感觉有点多（sha）余（bi），不是很想写下来……</p>
+<h2 id="6-9-algorithm下的常用函数"><a href="#6-9-algorithm下的常用函数" class="headerlink" title="6.9 algorithm下的常用函数"></a>6.9 algorithm下的常用函数</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">max(float, float)</td>
+<td style="text-align:left">注意参数类型</td>
+</tr>
+<tr>
+<td style="text-align:left">min(float,float)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">abs(int)</td>
+<td style="text-align:left">注意只能是整型</td>
+</tr>
+<tr>
+<td style="text-align:left">fabs(float)</td>
+<td style="text-align:left">注意这个函数在math头文件下面</td>
+</tr>
+<tr>
+<td style="text-align:left">swap()</td>
+<td style="text-align:left">交换变量的值</td>
+</tr>
+<tr>
+<td style="text-align:left">reverse(it,it2)</td>
+<td style="text-align:left">将<strong>数组指针</strong>或<strong>容器的迭代器</strong>在[it,it2)之间的元素反转顺序</td>
+</tr>
+<tr>
+<td style="text-align:left">next_permutation(it,it2)</td>
+<td style="text-align:left">修改为全排列中的下一个序列，到达最后一个会返回false</td>
+</tr>
+<tr>
+<td style="text-align:left">fill(it,it2,val)</td>
+<td style="text-align:left">将<strong>数组指针</strong>或<strong>容器的迭代器</strong>在[it,it2)之间的元素赋值为val</td>
+</tr>
+<tr>
+<td style="text-align:left">sort(it,it2,cmp)</td>
+<td style="text-align:left">喜闻乐见的排序</td>
+</tr>
+<tr>
+<td style="text-align:left">lower_bound(it,it2,val)</td>
+<td style="text-align:left">在[it,it2)之间寻找第一个&gt;=val的位置，返回指针或迭代器</td>
+</tr>
+<tr>
+<td style="text-align:left">upper_bound(it,it2,val)</td>
+<td style="text-align:left">在[it,it2)之间寻找第一个&gt;val的位置，返回指针或迭代器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  综上《算法笔记》的入门部分基本结束了，最初的计划是做完每一道题；和同学交流后考虑自身能力和时间因素；决定加快进度，跳过了很多花费时间的小题目，决定把精力集中在后面的提高部分。</p>
+<h1 id="chap7基础数据结构"><a href="#chap7基础数据结构" class="headerlink" title="chap7基础数据结构"></a>chap7基础数据结构</h1><p>  非常非常非常基础的数据结构：栈、队列、链表</p>
+<h2 id="7-1栈"><a href="#7-1栈" class="headerlink" title="7.1栈"></a>7.1栈</h2><p>  例子是中缀表达式转后缀表达式的计算器；又让人回想起被编译器前端课设支配的恐惧。</p>
+<h2 id="7-2队列"><a href="#7-2队列" class="headerlink" title="7.2队列"></a>7.2队列</h2><p>  同样非常水。</p>
+<h2 id="7-3链表"><a href="#7-3链表" class="headerlink" title="7.3链表"></a>7.3链表</h2><p>  分配节点除了C的malloc，还可以使用C++的new；C++中的new可以当作一个关键字使用，与malloc的区别在于，申请内存空间失败后会出现异常。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>  不是我故意水博客，这几章真的太水了。</p>
+<h1 id="chap8搜索专题"><a href="#chap8搜索专题" class="headerlink" title="chap8搜索专题"></a>chap8搜索专题</h1><p>  非常基础的（图）搜索算法，C++的STL没有封装DFS和BFS算法，还需要自己手动实现。</p>
+<h2 id="8-1深度优先搜索DFS"><a href="#8-1深度优先搜索DFS" class="headerlink" title="8.1深度优先搜索DFS"></a>8.1深度优先搜索DFS</h2><p>  DFS可以用<strong>栈</strong>来实现，但是在程序设计上不如递归来得更方便。<br>  DFS可以套用下面BFS的模板，区别只是把队列换成栈。</p>
+<h2 id="8-2广度优先搜索BFS"><a href="#8-2广度优先搜索BFS" class="headerlink" title="8.2广度优先搜索BFS"></a>8.2广度优先搜索BFS</h2><p>  BFS很容易用一个<strong>队列</strong>来记录访问的节点。这里有一个通用模板<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">  q.push(s);</span><br><span class="line">  <span class="keyword">while</span>(!q.empty())&#123;</span><br><span class="line">    <span class="comment">//访问队首元素</span></span><br><span class="line">    <span class="comment">//队首元素出队</span></span><br><span class="line">    <span class="comment">//下一层节点中未曾入队的节点加到队尾（未曾入队可以bool hash一下）</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="chap9结构专题"><a href="#chap9结构专题" class="headerlink" title="chap9结构专题"></a>chap9结构专题</h2><h2 id="9-1树与二叉树"><a href="#9-1树与二叉树" class="headerlink" title="9.1树与二叉树"></a>9.1树与二叉树</h2><h3 id="9-1-1树的定义与性质"><a href="#9-1-1树的定义与性质" class="headerlink" title="9.1.1树的定义与性质"></a>9.1.1树的定义与性质</h3><h3 id="9-1-2树的递归定义"><a href="#9-1-2树的递归定义" class="headerlink" title="9.1.2树的递归定义"></a>9.1.2树的递归定义</h3><h3 id="9-1-3二叉树的存储结构和基本操作"><a href="#9-1-3二叉树的存储结构和基本操作" class="headerlink" title="9.1.3二叉树的存储结构和基本操作"></a>9.1.3二叉树的存储结构和基本操作</h3><h2 id="9-2二叉树的遍历"><a href="#9-2二叉树的遍历" class="headerlink" title="9.2二叉树的遍历"></a>9.2二叉树的遍历</h2><p>  前三种遍历方式都可以使用递归实现，简单地调换顺序可以转换。</p>
+<h3 id="9-2-1先序遍历"><a href="#9-2-1先序遍历" class="headerlink" title="9.2.1先序遍历"></a>9.2.1先序遍历</h3><p>  root-&gt;left-&gt;right，其<strong>开头必然为root</strong>。</p>
+<h3 id="9-2-2中序遍历"><a href="#9-2-2中序遍历" class="headerlink" title="9.2.2中序遍历"></a>9.2.2中序遍历</h3><p>  left-&gt;root-&gt;right，如果能确定root，就可以得到左右子树。</p>
+<h3 id="9-2-3后序遍历"><a href="#9-2-3后序遍历" class="headerlink" title="9.2.3后序遍历"></a>9.2.3后序遍历</h3><p>  left-&gt;right-&gt;root，其<strong>结尾必然为root</strong>。</p>
+<h3 id="9-2-4层序遍历"><a href="#9-2-4层序遍历" class="headerlink" title="9.2.4层序遍历"></a>9.2.4层序遍历</h3><p>  和BFS相同，使用队列即可，其开头必然为root。</p>
+<h3 id="9-2-5二叉树的静态实现"><a href="#9-2-5二叉树的静态实现" class="headerlink" title="9.2.5二叉树的静态实现"></a>9.2.5二叉树的静态实现</h3><p>  没啥意义</p>
+<p>  中序遍历可以和先序、后序、层序中的任何一种结合构建出完整的二叉树；离开了中序遍历就无法构建二叉树，因为必须用中序遍历区分左子树和右子树。<br>  其中<strong>利用中序遍历和先序遍历还原二叉树</strong>的递归程序设计思路是非常清晰的，有很好的参考价值。<br><img src="/2019/07/03/算法笔记/921.png" title="中序遍历和先序遍历"></p>
+<ol>
+<li>递归：假设先序遍历和中序遍历的区间分别为<strong>[preL,preR]</strong>和<strong>[inL,inR]</strong>，我们知道先序遍历的首元素是root，在中序遍历中找到表示root的下标k时，就可以分辨出左子树和右子树；根据长度也可以分出先序遍历中的左子树和右子树。左子树的先序遍历和中序遍历的区间为<strong>[preL+1,preL+k-inL]</strong>和<strong>[inL,k-1]</strong>；右子树的先序遍历和中序遍历的区间为<strong>[preL+k-inL+1,preR]</strong>和<strong>[k+1,inR]</strong>，如此做就得到了两个子问题。</li>
+<li><p>初态：上面的递归终止时，必然是先序遍历长度为0时，这时已经从内部节点下降到了叶节点，二叉树不需要再补充了。</p>
+<p>中序遍历和后序遍历还原二叉树也是类似的。</p>
+</li>
+</ol>
+<h2 id="9-3树的遍历"><a href="#9-3树的遍历" class="headerlink" title="9.3树的遍历"></a>9.3树的遍历</h2><h3 id="9-3-1树的静态写法"><a href="#9-3-1树的静态写法" class="headerlink" title="9.3.1树的静态写法"></a>9.3.1树的静态写法</h3><p>  这个静态写法还说得过去，多叉树实现在C++中指针域可以用vector。</p>
+<h3 id="9-3-2树的先序遍历"><a href="#9-3-2树的先序遍历" class="headerlink" title="9.3.2树的先序遍历"></a>9.3.2树的先序遍历</h3><p>  root-&gt;other childs</p>
+<h3 id="9-3-3树的层序遍历"><a href="#9-3-3树的层序遍历" class="headerlink" title="9.3.3树的层序遍历"></a>9.3.3树的层序遍历</h3><p>  本质上还是BFS，只要是图就行。</p>
+<h3 id="9-3-4从树的遍历看DFS和BFS"><a href="#9-3-4从树的遍历看DFS和BFS" class="headerlink" title="9.3.4从树的遍历看DFS和BFS"></a>9.3.4从树的遍历看DFS和BFS</h3><p>  先根遍历就是DFS，层序遍历就是BFS。</p>
+<h2 id="9-4二叉查找树BST"><a href="#9-4二叉查找树BST" class="headerlink" title="9.4二叉查找树BST"></a>9.4二叉查找树BST</h2><h3 id="9-4-1BST定义"><a href="#9-4-1BST定义" class="headerlink" title="9.4.1BST定义"></a>9.4.1BST定义</h3><h3 id="9-4-2BST基本操作"><a href="#9-4-2BST基本操作" class="headerlink" title="9.4.2BST基本操作"></a>9.4.2BST基本操作</h3><p>  查找，插入，建树，删除；BIST的增删查都比较简单，即使即时推导也不难，如果忘了不如去看用伪代码写的《算法导论》。</p>
+<h3 id="9-4-3BST性质"><a href="#9-4-3BST性质" class="headerlink" title="9.4.3BST性质"></a>9.4.3BST性质</h3><p>  对BST进行中序遍历，遍历的结果是有序的。</p>
+<h2 id="9-5平衡二叉树AVL"><a href="#9-5平衡二叉树AVL" class="headerlink" title="9.5平衡二叉树AVL"></a>9.5平衡二叉树AVL</h2>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#chap4算法基础"><span class="toc-number">1.</span> <span class="toc-text">chap4算法基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1排序"><span class="toc-number">1.1.</span> <span class="toc-text">4.1排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2散列"><span class="toc-number">1.2.</span> <span class="toc-text">4.2散列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1整数散列"><span class="toc-number">1.2.1.</span> <span class="toc-text">4.2.1整数散列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2字符串hash初步"><span class="toc-number">1.2.2.</span> <span class="toc-text">4.2.2字符串hash初步</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3递归"><span class="toc-number">1.3.</span> <span class="toc-text">4.3递归</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#例：全排列问题"><span class="toc-number">1.3.1.</span> <span class="toc-text">例：全排列问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例：八皇后问题"><span class="toc-number">1.3.2.</span> <span class="toc-text">例：八皇后问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4贪心"><span class="toc-number">1.4.</span> <span class="toc-text">4.4贪心</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5二分"><span class="toc-number">1.5.</span> <span class="toc-text">4.5二分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-1整数二分"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.5.1整数二分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-2二分拓展"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.5.2二分拓展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-3快速幂"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.5.3快速幂</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6two-pointers"><span class="toc-number">1.6.</span> <span class="toc-text">4.6two pointers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7其他高效技巧"><span class="toc-number">1.7.</span> <span class="toc-text">4.7其他高效技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-1打表"><span class="toc-number">1.7.1.</span> <span class="toc-text">4.7.1打表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-2活用递推"><span class="toc-number">1.7.2.</span> <span class="toc-text">4.7.2活用递推</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-3随机选择算法"><span class="toc-number">1.7.3.</span> <span class="toc-text">4.7.3随机选择算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap5数学题"><span class="toc-number">2.</span> <span class="toc-text">chap5数学题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1简单数学"><span class="toc-number">2.1.</span> <span class="toc-text">5.1简单数学</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2最大公约数和最小公约数"><span class="toc-number">2.2.</span> <span class="toc-text">5.2最大公约数和最小公约数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap6C-的STL"><span class="toc-number">3.</span> <span class="toc-text">chap6C++的STL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-vector"><span class="toc-number">3.1.</span> <span class="toc-text">6.1 vector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-set"><span class="toc-number">3.2.</span> <span class="toc-text">6.2 set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-string"><span class="toc-number">3.3.</span> <span class="toc-text">6.3 string</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-map"><span class="toc-number">3.4.</span> <span class="toc-text">6.4 map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-queue"><span class="toc-number">3.5.</span> <span class="toc-text">6.5 queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-6-priority-queue"><span class="toc-number">3.6.</span> <span class="toc-text">6.6 priority_queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-stack"><span class="toc-number">3.7.</span> <span class="toc-text">6.7 stack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-pair"><span class="toc-number">3.8.</span> <span class="toc-text">6.8 pair</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-9-algorithm下的常用函数"><span class="toc-number">3.9.</span> <span class="toc-text">6.9 algorithm下的常用函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.10.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap7基础数据结构"><span class="toc-number">4.</span> <span class="toc-text">chap7基础数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1栈"><span class="toc-number">4.1.</span> <span class="toc-text">7.1栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2队列"><span class="toc-number">4.2.</span> <span class="toc-text">7.2队列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3链表"><span class="toc-number">4.3.</span> <span class="toc-text">7.3链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结-1"><span class="toc-number">4.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#chap8搜索专题"><span class="toc-number">5.</span> <span class="toc-text">chap8搜索专题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1深度优先搜索DFS"><span class="toc-number">5.1.</span> <span class="toc-text">8.1深度优先搜索DFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2广度优先搜索BFS"><span class="toc-number">5.2.</span> <span class="toc-text">8.2广度优先搜索BFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chap9结构专题"><span class="toc-number">5.3.</span> <span class="toc-text">chap9结构专题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1树与二叉树"><span class="toc-number">5.4.</span> <span class="toc-text">9.1树与二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1树的定义与性质"><span class="toc-number">5.4.1.</span> <span class="toc-text">9.1.1树的定义与性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-2树的递归定义"><span class="toc-number">5.4.2.</span> <span class="toc-text">9.1.2树的递归定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-3二叉树的存储结构和基本操作"><span class="toc-number">5.4.3.</span> <span class="toc-text">9.1.3二叉树的存储结构和基本操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2二叉树的遍历"><span class="toc-number">5.5.</span> <span class="toc-text">9.2二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-1先序遍历"><span class="toc-number">5.5.1.</span> <span class="toc-text">9.2.1先序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-2中序遍历"><span class="toc-number">5.5.2.</span> <span class="toc-text">9.2.2中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-3后序遍历"><span class="toc-number">5.5.3.</span> <span class="toc-text">9.2.3后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-4层序遍历"><span class="toc-number">5.5.4.</span> <span class="toc-text">9.2.4层序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-5二叉树的静态实现"><span class="toc-number">5.5.5.</span> <span class="toc-text">9.2.5二叉树的静态实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3树的遍历"><span class="toc-number">5.6.</span> <span class="toc-text">9.3树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-1树的静态写法"><span class="toc-number">5.6.1.</span> <span class="toc-text">9.3.1树的静态写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-2树的先序遍历"><span class="toc-number">5.6.2.</span> <span class="toc-text">9.3.2树的先序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-3树的层序遍历"><span class="toc-number">5.6.3.</span> <span class="toc-text">9.3.3树的层序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-3-4从树的遍历看DFS和BFS"><span class="toc-number">5.6.4.</span> <span class="toc-text">9.3.4从树的遍历看DFS和BFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4二叉查找树BST"><span class="toc-number">5.7.</span> <span class="toc-text">9.4二叉查找树BST</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1BST定义"><span class="toc-number">5.7.1.</span> <span class="toc-text">9.4.1BST定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2BST基本操作"><span class="toc-number">5.7.2.</span> <span class="toc-text">9.4.2BST基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-3BST性质"><span class="toc-number">5.7.3.</span> <span class="toc-text">9.4.3BST性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5平衡二叉树AVL"><span class="toc-number">5.8.</span> <span class="toc-text">9.5平衡二叉树AVL</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/03/算法笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/03/算法笔记/&text=算法笔记笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/03/算法笔记/&is_video=false&description=算法笔记笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=算法笔记笔记&body=Check out this article: http://yoursite.com/2019/07/03/算法笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/03/算法笔记/&title=算法笔记笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/03/算法笔记/&name=算法笔记笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

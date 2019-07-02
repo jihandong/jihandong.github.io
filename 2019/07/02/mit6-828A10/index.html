@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
+<meta name="keywords" content="MIT6.828,OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mit6.828A10抢占式多任务">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/mit6-828A10/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-07-02T13:55:16.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mit6.828A10抢占式多任务">
+<meta name="twitter:description" content="Introduction  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）  PartB：实现一个Unix-likefork()（user-mode环境可以创建自己的拷贝）">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>mit6.828A10抢占式多任务</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/07/03/算法笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/06/28/mit6-828A7/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=mit6.828A10抢占式多任务"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=mit6.828A10抢占式多任务"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mit6.828A10抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=mit6.828A10抢占式多任务&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartA-Multiprocessor-Support-and-Cooperative-Multitasking"><span class="toc-number">2.</span> <span class="toc-text">PartA Multiprocessor Support and Cooperative Multitasking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiprocessor-Support"><span class="toc-number">2.1.</span> <span class="toc-text">Multiprocessor Support</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Exercise1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Exercise1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-Robin-Scheduling"><span class="toc-number">2.2.</span> <span class="toc-text">Round-Robin Scheduling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Calls-for-Environment-Creation"><span class="toc-number">2.3.</span> <span class="toc-text">System Calls for Environment Creation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartB-Copy-on-Write-Fork"><span class="toc-number">3.</span> <span class="toc-text">PartB Copy-on-Write Fork</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#User-level-page-fault-handling"><span class="toc-number">3.1.</span> <span class="toc-text">User-level page fault handling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementing-Copy-on-Write-Fork"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing Copy-on-Write Fork</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartC-Preemptive-Multitasking-and-IPC"><span class="toc-number">4.</span> <span class="toc-text">PartC Preemptive Multitasking and IPC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Clock-Interrupts-and-Preemption"><span class="toc-number">4.1.</span> <span class="toc-text">Clock Interrupts and Preemption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inter-Process-communication-IPC"><span class="toc-number">4.2.</span> <span class="toc-text">Inter-Process communication (IPC)</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        mit6.828A10抢占式多任务
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-02T12:20:02.000Z" itemprop="datePublished">2019-07-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/MIT6-828/">MIT6.828</a>, <a class="tag-link" href="/tags/OS/">OS</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>  上个LAB实现了用户环境，这个LAB实现抢占式多任务处理。<br>  PartA：为JOS添加multiprocessor支持，实现round-robin scheduling，添加基本的环境管理system call（creat/destroy环境，allocate/map内存）<br>  PartB：实现一个Unix-like<code>fork()</code>（user-mode环境可以创建自己的拷贝）<br>  PartC：添加对inter-process communication（IPC，进程间通信）的支持，使不同用户环境通信同步，同时支持hardware clock的中断和抢占。</p>
+<h2 id="PartA-Multiprocessor-Support-and-Cooperative-Multitasking"><a href="#PartA-Multiprocessor-Support-and-Cooperative-Multitasking" class="headerlink" title="PartA Multiprocessor Support and Cooperative Multitasking"></a>PartA Multiprocessor Support and Cooperative Multitasking</h2><h3 id="Multiprocessor-Support"><a href="#Multiprocessor-Support" class="headerlink" title="Multiprocessor Support"></a>Multiprocessor Support</h3><p>  目标是实现symmetric multiprocessing（SMP，对称多处理）。<br>  SMP中所有的CPU视作相同，共享计算机资源；但是在启动阶段，将他们分成两类：</p>
+<ol>
+<li>bootstrap processor（BSP），负责初始化和引导OS；</li>
+<li>application processor（APs），在OS运行之后由BSP激活，具体使用哪个BSP由硬件和BIOS决定。<br>SMP系统中，每个CPU都有附带的local APIC unit（LAPIC），其负责在整个系统中提供中断，并提供唯一的标识符，本实验中使用LAPIC的如下基本功能：</li>
+</ol>
+<ul>
+<li>使用<code>cpunum()</code>阅读LAPIC ID判断正在运行的CPU</li>
+<li>使用<code>lapic_startap()</code>从BSP向APs发送中断（IPI）以启动其他CPU</li>
+<li><p>使用<code>apic_init()</code>编写LAPIC的内置定时器触发时钟中断，以支持抢占式多任务</p>
+<p>处理器通过memory-mapped I/O（MMIO）访问LAPIC，MMIO中有一部分直接硬链接到physical memory，所以可以使用原本访问内存的load/store instruction访问I/O device寄存器，</p>
+</li>
+</ul>
+<h4 id="Exercise1"><a href="#Exercise1" class="headerlink" title="Exercise1"></a>Exercise1</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">实现kern/pmap.c中的mmio_map_region()。</span><br><span class="line">kern/lapic.c中lapic_init的开头有显示如何使用这个函数</span><br><span class="line">You&apos;ll have to do the next exercise, too, before the tests for mmio_map_region will run.</span><br></pre></td></tr></table></figure>
+<h3 id="Round-Robin-Scheduling"><a href="#Round-Robin-Scheduling" class="headerlink" title="Round-Robin Scheduling"></a>Round-Robin Scheduling</h3><h3 id="System-Calls-for-Environment-Creation"><a href="#System-Calls-for-Environment-Creation" class="headerlink" title="System Calls for Environment Creation"></a>System Calls for Environment Creation</h3><h2 id="PartB-Copy-on-Write-Fork"><a href="#PartB-Copy-on-Write-Fork" class="headerlink" title="PartB Copy-on-Write Fork"></a>PartB Copy-on-Write Fork</h2><h3 id="User-level-page-fault-handling"><a href="#User-level-page-fault-handling" class="headerlink" title="User-level page fault handling"></a>User-level page fault handling</h3><h3 id="Implementing-Copy-on-Write-Fork"><a href="#Implementing-Copy-on-Write-Fork" class="headerlink" title="Implementing Copy-on-Write Fork"></a>Implementing Copy-on-Write Fork</h3><h2 id="PartC-Preemptive-Multitasking-and-IPC"><a href="#PartC-Preemptive-Multitasking-and-IPC" class="headerlink" title="PartC Preemptive Multitasking and IPC"></a>PartC Preemptive Multitasking and IPC</h2><h3 id="Clock-Interrupts-and-Preemption"><a href="#Clock-Interrupts-and-Preemption" class="headerlink" title="Clock Interrupts and Preemption"></a>Clock Interrupts and Preemption</h3><h3 id="Inter-Process-communication-IPC"><a href="#Inter-Process-communication-IPC" class="headerlink" title="Inter-Process communication (IPC)"></a>Inter-Process communication (IPC)</h3>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartA-Multiprocessor-Support-and-Cooperative-Multitasking"><span class="toc-number">2.</span> <span class="toc-text">PartA Multiprocessor Support and Cooperative Multitasking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multiprocessor-Support"><span class="toc-number">2.1.</span> <span class="toc-text">Multiprocessor Support</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Exercise1"><span class="toc-number">2.1.1.</span> <span class="toc-text">Exercise1</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Round-Robin-Scheduling"><span class="toc-number">2.2.</span> <span class="toc-text">Round-Robin Scheduling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#System-Calls-for-Environment-Creation"><span class="toc-number">2.3.</span> <span class="toc-text">System Calls for Environment Creation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartB-Copy-on-Write-Fork"><span class="toc-number">3.</span> <span class="toc-text">PartB Copy-on-Write Fork</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#User-level-page-fault-handling"><span class="toc-number">3.1.</span> <span class="toc-text">User-level page fault handling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementing-Copy-on-Write-Fork"><span class="toc-number">3.2.</span> <span class="toc-text">Implementing Copy-on-Write Fork</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PartC-Preemptive-Multitasking-and-IPC"><span class="toc-number">4.</span> <span class="toc-text">PartC Preemptive Multitasking and IPC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Clock-Interrupts-and-Preemption"><span class="toc-number">4.1.</span> <span class="toc-text">Clock Interrupts and Preemption</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Inter-Process-communication-IPC"><span class="toc-number">4.2.</span> <span class="toc-text">Inter-Process communication (IPC)</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/02/mit6-828A10/&text=mit6.828A10抢占式多任务"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/02/mit6-828A10/&is_video=false&description=mit6.828A10抢占式多任务"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=mit6.828A10抢占式多任务&body=Check out this article: http://yoursite.com/2019/07/02/mit6-828A10/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/02/mit6-828A10/&title=mit6.828A10抢占式多任务"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/02/mit6-828A10/&name=mit6.828A10抢占式多任务&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
