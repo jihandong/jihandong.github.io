@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="问题描述  我使用在virtualbox虚拟机中的archlinux，原计划这个虚拟机只用于进行实验6.828，所以只分配了很小的8G内容。一个月之后根分区空间就达到了78%，我不想做重复工作重建archlinux，所以我决定利用virtualbox的动态分配功能扩容到32G（注意目前日期的最新版本中，动态存储空间只能增大不能减小），经过90分钟解决了这个问题。  在开始解决之前，我查阅了网上的博">
+<meta name="keywords" content="archlinux,virtualbox,fdisk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="virtualbox&#x2F;archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="问题描述  我使用在virtualbox虚拟机中的archlinux，原计划这个虚拟机只用于进行实验6.828，所以只分配了很小的8G内容。一个月之后根分区空间就达到了78%，我不想做重复工作重建archlinux，所以我决定利用virtualbox的动态分配功能扩容到32G（注意目前日期的最新版本中，动态存储空间只能增大不能减小），经过90分钟解决了这个问题。  在开始解决之前，我查阅了网上的博">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-07-07T16:13:51.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="virtualbox&#x2F;archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）">
+<meta name="twitter:description" content="问题描述  我使用在virtualbox虚拟机中的archlinux，原计划这个虚拟机只用于进行实验6.828，所以只分配了很小的8G内容。一个月之后根分区空间就达到了78%，我不想做重复工作重建archlinux，所以我决定利用virtualbox的动态分配功能扩容到32G（注意目前日期的最新版本中，动态存储空间只能增大不能减小），经过90分钟解决了这个问题。  在开始解决之前，我查阅了网上的博">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/07/08/archlinux编译安装YCM/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/07/03/算法笔记part2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&text=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&is_video=false&description=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）&body=Check out this article: http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&name=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决过程"><span class="toc-number">2.</span> <span class="toc-text">解决过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-扩容——神说要有-24G，于是有了32G"><span class="toc-number">2.1.</span> <span class="toc-text">1.扩容——神说要有+24G，于是有了32G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-删除旧分区与创建新分区——毁灭与新生"><span class="toc-number">2.2.</span> <span class="toc-text">2.删除旧分区与创建新分区——毁灭与新生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-生成分区的引导"><span class="toc-number">2.3.</span> <span class="toc-text">3.生成分区的引导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-07T15:05:06.000Z" itemprop="datePublished">2019-07-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/archlinux/">archlinux</a>, <a class="tag-link" href="/tags/fdisk/">fdisk</a>, <a class="tag-link" href="/tags/virtualbox/">virtualbox</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>  我使用在virtualbox虚拟机中的archlinux，原计划这个虚拟机只用于进行实验6.828，所以只分配了很小的8G内容。一个月之后根分区空间就达到了78%，我不想做重复工作重建archlinux，所以我决定利用virtualbox的动态分配功能扩容到32G（<strong>注意目前日期的最新版本中，动态存储空间只能增大不能减小</strong>），经过90分钟解决了这个问题。<br>  在开始解决之前，我查阅了网上的博客，有以下几个问题：</p>
+<ul>
+<li>默认LVM：很多博客中默认分区扩容是指逻辑卷，而我的只是普通分区；</li>
+<li><p>几乎全员使用GUI界面：为了追求速度，我的虚拟机archlinux并没有安装图形界面，不能使用如Gparted之类的GUI工具；</p>
+<p>经过查询+摸索，使用fdisk和archlinux系统启动盘解决了这个问题。</p>
+</li>
+</ul>
+<h2 id="解决过程"><a href="#解决过程" class="headerlink" title="解决过程"></a>解决过程</h2><h3 id="1-扩容——神说要有-24G，于是有了32G"><a href="#1-扩容——神说要有-24G，于是有了32G" class="headerlink" title="1.扩容——神说要有+24G，于是有了32G"></a>1.扩容——神说要有+24G，于是有了32G</h3><p>  virtualbox的vdi虚拟机，这种虚拟机可以动态扩大（没错只能扩大）容量，我的虚拟机只有8G，这次直接扩容成32G。<br>  首先确保自己的虚拟机处于关闭状态，然后只要打开<strong>全局工具</strong>，选择相应的虚拟硬盘，通过<strong>属性</strong>就可以扩大容量了。<br></p>
+<h3 id="2-删除旧分区与创建新分区——毁灭与新生"><a href="#2-删除旧分区与创建新分区——毁灭与新生" class="headerlink" title="2.删除旧分区与创建新分区——毁灭与新生"></a>2.删除旧分区与创建新分区——毁灭与新生</h3><p>  我们可以启动虚拟机，使用<code>sudo fdisk -l</code>命令查看分区信息：<br><br>  图中的红字的意思大概是说我们的GPT没有触及虚拟机存储空间的最后面，这是肯定的，因为我们刚分配了一堆新空间嘛，我们不用管，后面生成新的GPT就行了。下面就是我的三个分区，分别是<strong>EFI引导分区</strong>，<strong>root根分区</strong>，和<strong>swap交换分区</strong>。<br>  这次的目标是给<strong>根分区扩容</strong>，我们的目标效果如下图所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//#表示未分配空间</span><br><span class="line">//before</span><br><span class="line">+-----+--------+------+--------------------------------+</span><br><span class="line">| EFI |  root  | swap |################################|</span><br><span class="line">+-----+--------+------+--------------------------------+</span><br><span class="line">//after</span><br><span class="line">+-----+-----------------------------------------+------+</span><br><span class="line">| EFI |                 root                    | swap |</span><br><span class="line">+-----+-----------------------------------------+------+</span><br></pre></td></tr></table></figure></p>
+<p>  其中root分区和swap分区都发生了变化，如果不是LVM分区是不能动态变化大小的，只能<strong>删除新建</strong>；root分区改变了大小，但是<strong>没有改变起始位置，所以即使删除旧root分区数据也不会丢失</strong>；swap可任意迫害。</p>
+<p>  首先我们关闭swap分区。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapoff /dev/sda3</span><br></pre></td></tr></table></figure></p>
+<p>  接下来我们进入fdisk开始编辑分区，过程一定要及其小心<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sda	<span class="comment"># 这里用你的磁盘名取代sda</span></span><br><span class="line"><span class="comment"># 删除swap分区</span></span><br><span class="line">&gt; d</span><br><span class="line">&gt; 3					<span class="comment"># 指/sda3</span></span><br><span class="line"><span class="comment"># 创建扩展新分区，默认sda3</span></span><br><span class="line">&gt; n </span><br><span class="line">&gt; -2G				<span class="comment"># 给新swap分区留点空间</span></span><br><span class="line"><span class="comment"># 创建交换分区，默认sda4</span></span><br><span class="line">&gt; n</span><br><span class="line">&gt; v					<span class="comment"># 验证分区（上面的红字不会在fdisk中再出现）</span></span><br><span class="line">&gt; W					<span class="comment"># 写入</span></span><br></pre></td></tr></table></figure></p>
+<p>  接着我们将新分区格式化：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs.ext /dev/sda3</span><br><span class="line">sudo mkswap /dev/sda4</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-生成分区的引导"><a href="#3-生成分区的引导" class="headerlink" title="3.生成分区的引导"></a>3.生成分区的引导</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题描述"><span class="toc-number">1.</span> <span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决过程"><span class="toc-number">2.</span> <span class="toc-text">解决过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-扩容——神说要有-24G，于是有了32G"><span class="toc-number">2.1.</span> <span class="toc-text">1.扩容——神说要有+24G，于是有了32G</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-删除旧分区与创建新分区——毁灭与新生"><span class="toc-number">2.2.</span> <span class="toc-text">2.删除旧分区与创建新分区——毁灭与新生</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-生成分区的引导"><span class="toc-number">2.3.</span> <span class="toc-text">3.生成分区的引导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&text=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&is_video=false&description=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）&body=Check out this article: http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&title=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/07/virtualbox-archlinux只使用fdisk工具扩大分区（非LVM）/&name=virtualbox/archlinux在不损失数据只使用fdisk工具扩大根分区（非LVM）&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="​    在已经学习过C和python的基础上写下的简单笔记。 GO basican example1234567package main	//包名import &quot;fmt&quot;	//导入包func main() &amp;#123;    fmt.Println(&quot;Hello, World!&quot;)	//行末不需要分号&amp;#125; data type 布尔：true&amp;amp;false； 数值： 字符串：可以直接">
+<meta name="keywords" content="go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO语言学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/go语言学习笔记/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="​    在已经学习过C和python的基础上写下的简单笔记。 GO basican example1234567package main	//包名import &quot;fmt&quot;	//导入包func main() &amp;#123;    fmt.Println(&quot;Hello, World!&quot;)	//行末不需要分号&amp;#125; data type 布尔：true&amp;amp;false； 数值： 字符串：可以直接">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-07-10T09:19:29.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GO语言学习笔记">
+<meta name="twitter:description" content="​    在已经学习过C和python的基础上写下的简单笔记。 GO basican example1234567package main	//包名import &quot;fmt&quot;	//导入包func main() &amp;#123;    fmt.Println(&quot;Hello, World!&quot;)	//行末不需要分号&amp;#125; data type 布尔：true&amp;amp;false； 数值： 字符串：可以直接">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>GO语言学习笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/07/08/archlinux编译安装YCM/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/10/go语言学习笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/10/go语言学习笔记/&text=GO语言学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/10/go语言学习笔记/&is_video=false&description=GO语言学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GO语言学习笔记&body=Check out this article: http://yoursite.com/2019/07/10/go语言学习笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/10/go语言学习笔记/&name=GO语言学习笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GO-basic"><span class="toc-number">1.</span> <span class="toc-text">GO basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#an-example"><span class="toc-number">1.1.</span> <span class="toc-text">an example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-type"><span class="toc-number">1.2.</span> <span class="toc-text">data type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#var-const"><span class="toc-number">1.3.</span> <span class="toc-text">var/const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#branch-loop"><span class="toc-number">1.4.</span> <span class="toc-text">branch/loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#func"><span class="toc-number">1.5.</span> <span class="toc-text">func</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array-pointer"><span class="toc-number">1.6.</span> <span class="toc-text">array/pointer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct"><span class="toc-number">1.7.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trans-data-type"><span class="toc-number">1.8.</span> <span class="toc-text">trans data type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slice"><span class="toc-number">1.9.</span> <span class="toc-text">slice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-number">1.10.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#range"><span class="toc-number">1.11.</span> <span class="toc-text">range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interface-to-be-continued"><span class="toc-number">1.12.</span> <span class="toc-text">interface(to be continued)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error-handle-to-be-continued"><span class="toc-number">1.13.</span> <span class="toc-text">error handle(to be continued)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GO-concurrent"><span class="toc-number">2.</span> <span class="toc-text">GO concurrent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#an-example-of-concurrent"><span class="toc-number">2.1.</span> <span class="toc-text">an example of concurrent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#channel-buf"><span class="toc-number">2.2.</span> <span class="toc-text">channel buf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#traversal-amp-close-channel"><span class="toc-number">2.3.</span> <span class="toc-text">traversal &amp; close channel</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">3.</span> <span class="toc-text">reference</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        GO语言学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-10T02:27:37.000Z" itemprop="datePublished">2019-07-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/go/">go</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>​    在已经学习过C和python的基础上写下的简单笔记。</p>
+<h2 id="GO-basic"><a href="#GO-basic" class="headerlink" title="GO basic"></a>GO basic</h2><h3 id="an-example"><a href="#an-example" class="headerlink" title="an example"></a>an example</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main	<span class="comment">//包名</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span>	<span class="comment">//导入包</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello, World!"</span>)	<span class="comment">//行末不需要分号</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="data-type"><a href="#data-type" class="headerlink" title="data type"></a>data type</h3><ul>
+<li>布尔：true&amp;false；</li>
+<li>数值：</li>
+<li>字符串：可以直接用加法进行拼接；</li>
+<li>派生类型</li>
+</ul>
+<h3 id="var-const"><a href="#var-const" class="headerlink" title="var/const"></a>var/const</h3><p>​    变量使用关键字<code>var</code>，常量使用关键字<code>const</code>；语法几乎相同（除了<code>:=</code>）。<br>​    变量定义但没有初始化则其内存空间清0，</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//变量</span></span><br><span class="line"><span class="keyword">var</span> b, c <span class="keyword">int</span> = <span class="number">1</span>, <span class="number">2</span>		<span class="comment">//id在var关键字和type之间</span></span><br><span class="line"><span class="keyword">var</span> d = <span class="literal">true</span>			<span class="comment">//初始化可以省略type</span></span><br><span class="line">f := <span class="string">"Runoob"</span>			<span class="comment">//初始化可以省略var</span></span><br></pre></td></tr></table></figure>
+<h3 id="branch-loop"><a href="#branch-loop" class="headerlink" title="branch/loop"></a>branch/loop</h3><p>​    和C没有什么差别，主要是：</p>
+<ul>
+<li><code>switch</code>中默认带有’break’，如果想要继续执行需要关键字<code>fallthrough</code>；</li>
+<li><code>select</code>：从正确的<code>case</code>中选择一个进入；</li>
+<li><code>for</code>：不需要加括号了，而且代替了’while’关键字，必须加上<code>{}</code></li>
+</ul>
+<h3 id="func"><a href="#func" class="headerlink" title="func"></a>func</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">swap</span><span class="params">(x, y <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span></span> &#123;	<span class="comment">//函数名和形参表在func关键字和返回类型之间</span></span><br><span class="line">   <span class="keyword">return</span> y, x								<span class="comment">//可以多个返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>函数作为参数：
+闭包
+</code></pre><h3 id="array-pointer"><a href="#array-pointer" class="headerlink" title="array/pointer"></a>array/pointer</h3><p>​    数组的规则和C类似，关键是type的位置有一些变化，而且初始化没有等号<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> balance [<span class="number">10</span>]<span class="keyword">float32</span> 									<span class="comment">//数组定义</span></span><br><span class="line"><span class="keyword">var</span> balance = [<span class="number">5</span>]<span class="keyword">float32</span>&#123;<span class="number">1000.0</span>, <span class="number">2.0</span>, <span class="number">3.4</span>, <span class="number">7.0</span>, <span class="number">50.0</span>&#125;		<span class="comment">//数组初始化</span></span><br><span class="line"><span class="keyword">var</span> balance = [...]<span class="keyword">float32</span>&#123;<span class="number">1000.0</span>, <span class="number">2.0</span>, <span class="number">3.4</span>, <span class="number">7.0</span>, <span class="number">50.0</span>&#125;	<span class="comment">//如果不是...则为切片</span></span><br><span class="line"><span class="keyword">var</span> salary <span class="keyword">float32</span> = balance[<span class="number">9</span>]								<span class="comment">//数组元素引用</span></span><br></pre></td></tr></table></figure></p>
+<p>​    指针的规则和C相同，<code>*</code>解引用，<code>&amp;</code>取址。<br>​    指针变量初始化为<code>nil</code>，数值上等于0。</p>
+<h3 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h3><p>​    <code>type</code>关键字代替了’typedef’，使用结构类型名时不用加上<code>struct</code>。<br>     有趣的一点是，struct变量和struct指针都使用<code>.</code>来访问结构元素（C语言中指针使用的是<code>-&gt;</code>）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Books <span class="keyword">struct</span> &#123;</span><br><span class="line">   title <span class="keyword">string</span></span><br><span class="line">   author <span class="keyword">string</span></span><br><span class="line">   subject <span class="keyword">string</span></span><br><span class="line">   book_id <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Books&#123;<span class="string">"Go语言"</span>, <span class="string">"https://jihandong.github.io/"</span>, <span class="string">"Go语言"</span>, <span class="number">2333333</span>&#125;</span><br><span class="line">Books&#123;title: <span class="string">"Go语言"</span>, author: <span class="string">"https://jihandong.github.io/"</span>&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="trans-data-type"><a href="#trans-data-type" class="headerlink" title="trans data type"></a>trans data type</h3><p>​    与C语言相同，只是<code>(_typename)</code>写在变量名后面。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum <span class="keyword">int</span> = <span class="number">17</span></span><br><span class="line"><span class="keyword">var</span> count <span class="keyword">int</span> = <span class="number">5</span></span><br><span class="line"><span class="keyword">var</span> mean <span class="keyword">float32</span></span><br><span class="line">mean = <span class="keyword">float32</span>(sum)/<span class="keyword">float32</span>(count)</span><br></pre></td></tr></table></figure></p>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h3><p>​    一种动态数组，类似python中的list，因为slice中附带了很多方法。<br>​    需要注意slice的声明需要<code>[]</code>中间不写任何东西。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var s []int				//声明</span><br><span class="line">var s []int&#123;1, 2, 3&#125;	//初始化</span><br><span class="line">s := []int&#123;1, 2, 3&#125;		//初始化</span><br><span class="line">s := make([]int, 3)		//make第二个参数是长度</span><br><span class="line">s := make([]int, 3, 5)	//make第三个参数是容量</span><br></pre></td></tr></table></figure>
+<p>​    用下面的例子区分<strong>长度</strong>和<strong>容量</strong>。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>,<span class="built_in">len</span>(x),<span class="built_in">cap</span>(x),x)</span><br><span class="line"></span><br><span class="line"><span class="comment">//len=3 cap=5 slice=[0 0 0]</span></span><br></pre></td></tr></table></figure></p>
+<p>​    用下面的例子演示<strong>切片截取</strong>，区间为<strong>[begin,end)</strong>（和python相同）。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s := []<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">s[<span class="number">1</span>:<span class="number">4</span>]	<span class="comment">//   1 2 3 4</span></span><br><span class="line">s[:<span class="number">3</span>]	<span class="comment">// 0 1 2</span></span><br><span class="line">s[<span class="number">2</span>:]	<span class="comment">//     2 3 4</span></span><br></pre></td></tr></table></figure></p>
+<p>​    用下面的例子演示<strong>append</strong>和<strong>copy</strong>的功能。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> nums []<span class="keyword">int</span></span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>, <span class="built_in">len</span>(nums), <span class="built_in">cap</span>(nums), nums)</span><br><span class="line"></span><br><span class="line">nums = <span class="built_in">append</span>(nums, <span class="number">0</span>)</span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>, <span class="built_in">len</span>(nums), <span class="built_in">cap</span>(nums), nums)</span><br><span class="line"></span><br><span class="line">nums = <span class="built_in">append</span>(nums, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>, <span class="built_in">len</span>(nums), <span class="built_in">cap</span>(nums), nums)</span><br><span class="line"></span><br><span class="line">more := <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="built_in">len</span>(nums), <span class="number">2</span> * <span class="built_in">cap</span>(nums))</span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>, <span class="built_in">len</span>(more), <span class="built_in">cap</span>(more), more)</span><br><span class="line"></span><br><span class="line"><span class="built_in">copy</span>(more, nums)</span><br><span class="line">fmt.Printf(<span class="string">"len=%d cap=%d slice=%v\n"</span>, <span class="built_in">len</span>(more), <span class="built_in">cap</span>(more), more)</span><br><span class="line"></span><br><span class="line"><span class="comment">//len=0 cap=0 slice=[]</span></span><br><span class="line"><span class="comment">//len=1 cap=1 slice=[0]</span></span><br><span class="line"><span class="comment">//len=4 cap=4 slice=[0 1 2 3]</span></span><br><span class="line"><span class="comment">//len=4 cap=8 slice=[0 0 0 0]</span></span><br><span class="line"><span class="comment">//len=4 cap=8 slice=[0 1 2 3]</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>​    类似C++中的map，是键值对的集合<br>​    下面利用D&amp;D中的职业和生命骰给出一个例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> class_map_dice <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>	<span class="comment">//定义一个map集合，也可以用make创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入键值对</span></span><br><span class="line">class_map_dice[<span class="string">"fighter"</span>] = <span class="number">10</span></span><br><span class="line">class_map_dice[<span class="string">"wizard"</span>] = <span class="number">4</span></span><br><span class="line">class_map_dice[<span class="string">"cleric"</span>] = <span class="number">8</span></span><br><span class="line">class_map_dice[<span class="string">"rogue"</span>] = <span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//查询职业：fighter</span></span><br><span class="line">fdice, fok := class_map_dice[<span class="string">"fighter"</span>]</span><br><span class="line"><span class="keyword">if</span>(fok) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"life dice of fighter is "</span>, fdice)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"no such calss named fighter"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//查询职业：bard</span></span><br><span class="line">bdice, bok := class_map_dice[<span class="string">"bard"</span>]</span><br><span class="line"><span class="keyword">if</span>(bok) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"life dice of bard is "</span>, bdice)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">	fmt.Printf(<span class="string">"no such calss named bard"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//life dice of fighter is 10</span></span><br><span class="line"><span class="comment">//no such calss named bard</span></span><br></pre></td></tr></table></figure>
+<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><p>​    类似python，<code>range</code>用于在<code>for</code>循环中迭代array、slice、map、channel中的元素。<br>​    用下面的一个例子演示上面提到的几种功能：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//slice array</span></span><br><span class="line">    <span class="comment">//找出fib数列中第几项等于13</span></span><br><span class="line">    fib := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> i, v := <span class="keyword">range</span> fib &#123;</span><br><span class="line">        <span class="keyword">if</span> v == <span class="number">13</span> &#123;</span><br><span class="line">            fmt.Printf(<span class="string">"fib(%d) = 13\n"</span>, i)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//map</span></span><br><span class="line">    <span class="comment">//打印CCCP的历任领导人</span></span><br><span class="line">    num_map_leader := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;<span class="number">1</span> : <span class="string">"LENIN"</span>, <span class="number">2</span> : <span class="string">"STARLIN"</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> k, v := <span class="keyword">range</span> num_map_leader &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"The %dth leader of CCCP is %s\n"</span>, k, v)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//channel</span></span><br><span class="line">    <span class="comment">//见下文GO concurrent/traversal &amp; close channel一节的example</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="interface-to-be-continued"><a href="#interface-to-be-continued" class="headerlink" title="interface(to be continued)"></a>interface(to be continued)</h3><h3 id="error-handle-to-be-continued"><a href="#error-handle-to-be-continued" class="headerlink" title="error handle(to be continued)"></a>error handle(to be continued)</h3><h2 id="GO-concurrent"><a href="#GO-concurrent" class="headerlink" title="GO concurrent"></a>GO concurrent</h2><p>​    go语言中维护着轻量级线程goroutine，所有的goroutine共享空间，按照下面的格式使用关键字<code>go</code>可以以一个goroutine的形式执行函数。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> add(x, y)</span><br></pre></td></tr></table></figure></p>
+<h3 id="an-example-of-concurrent"><a href="#an-example-of-concurrent" class="headerlink" title="an example of concurrent"></a>an example of concurrent</h3><p>​    goroutine间的通信渠道使用数据结构<strong>channel</strong>实现，创建使用关键字<code>chan</code>，发送和接收信息使用关键字<code>&lt;-</code>。<br>下面用一个例子演示如何使用channel。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 编写一个程序，开启两个goroutine，分别计算一个array前后半段的数字之和，</span></span><br><span class="line"><span class="comment"> * 在main函数中再将两个返回值相加得到最终的和</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span> <span class="params">(s []<span class="keyword">int</span>, ch <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    result := <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">        result += v</span><br><span class="line">    &#125;</span><br><span class="line">    ch &lt;- result</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    s := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>&#125;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)	<span class="comment">//chan type表示相应type的channel类型</span></span><br><span class="line">    <span class="keyword">go</span> sum(s[:<span class="built_in">len</span>(s) / <span class="number">2</span>], ch)</span><br><span class="line">    <span class="keyword">go</span> sum(s[<span class="built_in">len</span>(s) / <span class="number">2</span>:], ch)</span><br><span class="line">    x := &lt;-ch	<span class="comment">//未初始化的变量除了&lt;-还必须加上:=</span></span><br><span class="line">    y := &lt;-ch</span><br><span class="line">    fmt.Printf(<span class="string">"x=%d y=%d x+y=%d\n"</span>, x, y, x+y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="channel-buf"><a href="#channel-buf" class="headerlink" title="channel buf"></a>channel buf</h3><p>​    除此之外可以给channel设置<strong>缓冲区</strong>，缓冲区使得send端和recv端可以<strong>异步传输</strong>。<br>​    没有缓冲区时，send端会阻塞到recv端愿意来接受数据为止；有缓冲区且没有满时，send端可以将数据放在缓冲区里就走（如果满了还是会阻塞）。<br>​    声明缓冲区大小只要使用make的第二个参数即可。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>， <span class="number">100</span>)	<span class="comment">//来个100个int的缓冲区</span></span><br></pre></td></tr></table></figure>
+<h3 id="traversal-amp-close-channel"><a href="#traversal-amp-close-channel" class="headerlink" title="traversal &amp; close channel"></a>traversal &amp; close channel</h3><p>​    使用<code>range</code>遍历channel，使用<code>close</code>关闭channel。<br>​    使用下面得到斐波那契数列各项的例子来说明：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fib</span> <span class="params">(n <span class="keyword">int</span>, ch <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    x, y := <span class="number">1</span>, <span class="number">1</span>	<span class="comment">//赋值可以集中到一行，减少空间</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; n; i++ &#123;</span><br><span class="line">        ch &lt;- x</span><br><span class="line">        x, y = y, x + y	<span class="comment">//非常方便的运算，省去了中间变量</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>(ch)	<span class="comment">//最后一定要关闭channel</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">go</span> fib(<span class="number">8</span>, ch)</span><br><span class="line">    counter := <span class="number">1</span></span><br><span class="line">    <span class="comment">/* 注意range会一直遍历到channle关闭</span></span><br><span class="line"><span class="comment">     * 如果没有关闭，遍历完8项后这里会一直阻塞下去</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">for</span> rv := <span class="keyword">range</span> ch &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"fib(%d) = %d\n"</span>, counter, rv)</span><br><span class="line">        counter++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><p><a href="https://www.runoob.com/go/go-concurrent.html" target="_blank" rel="noopener">go教程</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GO-basic"><span class="toc-number">1.</span> <span class="toc-text">GO basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#an-example"><span class="toc-number">1.1.</span> <span class="toc-text">an example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#data-type"><span class="toc-number">1.2.</span> <span class="toc-text">data type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#var-const"><span class="toc-number">1.3.</span> <span class="toc-text">var/const</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#branch-loop"><span class="toc-number">1.4.</span> <span class="toc-text">branch/loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#func"><span class="toc-number">1.5.</span> <span class="toc-text">func</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array-pointer"><span class="toc-number">1.6.</span> <span class="toc-text">array/pointer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#struct"><span class="toc-number">1.7.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trans-data-type"><span class="toc-number">1.8.</span> <span class="toc-text">trans data type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#slice"><span class="toc-number">1.9.</span> <span class="toc-text">slice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-number">1.10.</span> <span class="toc-text">map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#range"><span class="toc-number">1.11.</span> <span class="toc-text">range</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#interface-to-be-continued"><span class="toc-number">1.12.</span> <span class="toc-text">interface(to be continued)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error-handle-to-be-continued"><span class="toc-number">1.13.</span> <span class="toc-text">error handle(to be continued)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GO-concurrent"><span class="toc-number">2.</span> <span class="toc-text">GO concurrent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#an-example-of-concurrent"><span class="toc-number">2.1.</span> <span class="toc-text">an example of concurrent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#channel-buf"><span class="toc-number">2.2.</span> <span class="toc-text">channel buf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#traversal-amp-close-channel"><span class="toc-number">2.3.</span> <span class="toc-text">traversal &amp; close channel</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reference"><span class="toc-number">3.</span> <span class="toc-text">reference</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/10/go语言学习笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/10/go语言学习笔记/&text=GO语言学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/10/go语言学习笔记/&is_video=false&description=GO语言学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=GO语言学习笔记&body=Check out this article: http://yoursite.com/2019/07/10/go语言学习笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/10/go语言学习笔记/&title=GO语言学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/10/go语言学习笔记/&name=GO语言学习笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Inici</a></li>
+         
+          <li><a href="/about/">Qui som</a></li>
+         
+          <li><a href="/archives/">Articles</a></li>
+         
+          <li><a href="/projects_url">Projectes</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
