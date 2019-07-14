@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang=Ch>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="介绍​    我对配置的观点是：尽可能少。对于文本编辑器，过多的配置会让人对环境产生过多的依赖，对改变环境不太方便，但是自动补全实在是太诱人了，所以将vim几乎是最好、最难安装、最难配置的自动补全插件YCM的安装配置过程记录如下。​    环境：archlinux-5.2，无图形界面 解决依赖​    编译安装YCM需要足够高版本的vim，python，clang，cmake，由于我们可以pacm">
+<meta name="keywords" content="vim,YCM,archlinux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="archlinux安装配置YCM">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/archlinux安装YCM/index.html">
+<meta property="og:site_name" content="JiHandong&#39;s Blog">
+<meta property="og:description" content="介绍​    我对配置的观点是：尽可能少。对于文本编辑器，过多的配置会让人对环境产生过多的依赖，对改变环境不太方便，但是自动补全实在是太诱人了，所以将vim几乎是最好、最难安装、最难配置的自动补全插件YCM的安装配置过程记录如下。​    环境：archlinux-5.2，无图形界面 解决依赖​    编译安装YCM需要足够高版本的vim，python，clang，cmake，由于我们可以pacm">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-07-14T09:01:39.342Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="archlinux安装配置YCM">
+<meta name="twitter:description" content="介绍​    我对配置的观点是：尽可能少。对于文本编辑器，过多的配置会让人对环境产生过多的依赖，对改变环境不太方便，但是自动补全实在是太诱人了，所以将vim几乎是最好、最难安装、最难配置的自动补全插件YCM的安装配置过程记录如下。​    环境：archlinux-5.2，无图形界面 解决依赖​    编译安装YCM需要足够高版本的vim，python，clang，cmake，由于我们可以pacm">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>archlinux安装配置YCM</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/07/10/go语言学习笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/07/03/算法笔记part2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/07/archlinux安装YCM/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&text=archlinux安装配置YCM"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&is_video=false&description=archlinux安装配置YCM"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=archlinux安装配置YCM&body=Check out this article: http://yoursite.com/2019/07/07/archlinux安装YCM/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&name=archlinux安装配置YCM&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决依赖"><span class="toc-number">2.</span> <span class="toc-text">解决依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#download"><span class="toc-number">3.</span> <span class="toc-text">download</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile"><span class="toc-number">4.</span> <span class="toc-text">compile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configure"><span class="toc-number">5.</span> <span class="toc-text">configure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        archlinux安装配置YCM
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">JiHandong's Blog</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-07T15:05:06.000Z" itemprop="datePublished">2019-07-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/YCM/">YCM</a>, <a class="tag-link" href="/tags/archlinux/">archlinux</a>, <a class="tag-link" href="/tags/vim/">vim</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>​    我对配置的观点是：<strong>尽可能少</strong>。对于文本编辑器，过多的配置会让人对环境产生过多的依赖，对改变环境不太方便，但是<strong>自动补全</strong>实在是太诱人了，所以将vim几乎是最好、最难安装、最难配置的自动补全插件YCM的安装配置过程记录如下。<br>​    环境：archlinux-5.2，无图形界面</p>
+<h2 id="解决依赖"><a href="#解决依赖" class="headerlink" title="解决依赖"></a>解决依赖</h2><p>​    编译安装YCM需要足够高版本的<code>vim</code>，<code>python</code>，<code>clang</code>，<code>cmake</code>，由于我们可以<code>pacman</code>滚动更新，所以这并不构成问题。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S vim python clang cmake	<span class="comment"># 确保最新版本</span></span><br></pre></td></tr></table></figure></p>
+<p>​    关键在于编译还需要一些python包，如果缺少这些包，可以在下载YCM后，在其目录下使用<code>python run-tests.py</code>测试时发现；测试时间很长，我们可以提前准备好。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay pip								<span class="comment"># 需要使用pip管理python包</span></span><br><span class="line">yay install flake8 mock nose future	<span class="comment"># 这是我缺少的包，随时间变化和机器不同可能有差异</span></span><br><span class="line">yay hamcrest						<span class="comment"># 这个包无法用pip安装，只能从社区下</span></span><br></pre></td></tr></table></figure></p>
+<p>​    于是准备就绪，可以开始安装了。</p>
+<h2 id="download"><a href="#download" class="headerlink" title="download"></a>download</h2><p>​    首先<strong>强烈建议安装vundle插件</strong>，这是一个管理其它插件的插件，虽然我们不大可能再安装更多插件，但是保持<code>.vim</code>插件目录下的整洁，构建分层绝对不是什么坏事，况且它也不难安装。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</span><br></pre></td></tr></table></figure></p>
+<p>​    然后我们在vim的配置文件<code>.vimrc</code>中做如下设置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> nocompatible</span><br><span class="line">filetype off</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> rtp+=~/.vim/bundle/Vundle.vim</span><br><span class="line">call vundle<span class="comment">#begin()</span></span><br><span class="line"></span><br><span class="line">Plugin <span class="string">'gmarik/Vundle.vim'</span></span><br><span class="line">Plugin <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"></span><br><span class="line">call vundle<span class="comment">#end()</span></span><br><span class="line">filetype plugin indent on</span><br></pre></td></tr></table></figure></p>
+<p>​    之后我们就可以使用vundle安装YCM，下载YCM的时间很长，因为需要从外网上下载几十M的内容，还可能失败，所以这里我认为使用代理比较好，过程不会显示，需要静静等待。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxychains vim		<span class="comment">#经proxychains打开vim</span></span><br><span class="line">:PluginInstall		<span class="comment">#vim中的命令，之后静待安装完毕</span></span><br></pre></td></tr></table></figure></p>
+<p>​    安装完毕之后别忘了<code>l</code>检查一下安装记录，确认安装成功；如果失败的话可以考虑<code>git clone</code>下载YCM，但是vundle还是要保留。</p>
+<h2 id="compile"><a href="#compile" class="headerlink" title="compile"></a>compile</h2><p>​    然后就是最困难的环节：<strong>编译安装</strong>，之前我们不过是下载完毕而已，接下来还需要我们手动编译安装。<br>​    首先需要解决python包的依赖，如果完成了前面的步骤，就可以直接<code>python run-tests.py</code>进行检查，如果正确的话会得到百来个ok，以及最终的一个“大OK”。<br>​    然后可以用cmake安装，也可以使用自带的py安装脚本，添加不同的参数，表示对不同语言的支持，比如：<code>--clang-completor</code>表示对c-family语言的支持，<code>--go-completer</code>表示对go语言的支持，此外还有java、rust、C#等，不一一枚举。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install.py --clang-completer --go-completer</span><br></pre></td></tr></table></figure></p>
+<p>​    如果按照上一步骤解决了依赖，这里的编译会经过一段漫长的时间，并最终成功；如果失败就根据信息看看是什么东西忘了安装吧。</p>
+<h2 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h2><p>​    我们已经下载，编译，安装完毕，但还是不能用，我们还要在vim中做一些配置。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> g:ycm_global_ycm_extra_conf = <span class="string">'~/.ycm_extra_conf.py'</span>	<span class="comment">#补全配置文件位置</span></span><br><span class="line"><span class="built_in">let</span> g:ycm_server_python_interpreter = <span class="string">'/usr/bin/python'</span>		<span class="comment">#python位置</span></span><br><span class="line"><span class="built_in">let</span> g:ycm_seed_identifiers_with_syntax = 1					<span class="comment">#语法关键字补全</span></span><br></pre></td></tr></table></figure></p>
+<p>​    还没完呐！<strong>YCM自动补全的机制需要一个flags数组</strong>，这个数组中包含了让YCM生效的重要信息，尤其是<strong>自动补全检索的目录</strong>，除此之外还有很多需要编写的东西，YCM中的配置文件没有一个能拿来用的，下面我给出一个模板，可以根据实际电脑还有工程项目调整：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright (C) 2014 Google Inc.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file is part of ycmd.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ycmd is free software: you can redistribute it and/or modify</span></span><br><span class="line"><span class="comment"># it under the terms of the GNU General Public License as published by</span></span><br><span class="line"><span class="comment"># the Free Software Foundation, either version 3 of the License, or</span></span><br><span class="line"><span class="comment"># (at your option) any later version.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ycmd is distributed in the hope that it will be useful,</span></span><br><span class="line"><span class="comment"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span></span><br><span class="line"><span class="comment"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></span><br><span class="line"><span class="comment"># GNU General Public License for more details.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># You should have received a copy of the GNU General Public License</span></span><br><span class="line"><span class="comment"># along with ycmd.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> ycm_core</span><br><span class="line"> </span><br><span class="line"><span class="comment"># These are the compilation flags that will be used in case there's no</span></span><br><span class="line"><span class="comment"># compilation database set (by default, one is not set).</span></span><br><span class="line"><span class="comment"># CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.</span></span><br><span class="line">flags = [</span><br><span class="line"><span class="string">'-Wall'</span>,</span><br><span class="line"><span class="string">'-Wextra'</span>,</span><br><span class="line"><span class="string">'-Werror'</span>,</span><br><span class="line"><span class="string">'-fexceptions'</span>,</span><br><span class="line"><span class="string">'-DNDEBUG'</span>,</span><br><span class="line"><span class="comment"># THIS IS IMPORTANT! Without a "-std=&lt;something&gt;" flag, clang won't know which</span></span><br><span class="line"><span class="comment"># language to use when compiling headers. So it will guess. Badly. So C++</span></span><br><span class="line"><span class="comment"># headers will be compiled as C headers. You don't want that so ALWAYS specify</span></span><br><span class="line"><span class="comment"># a "-std=&lt;something&gt;".</span></span><br><span class="line"><span class="comment"># For a C project, you would set this to something like 'c99' instead of</span></span><br><span class="line"><span class="comment"># 'c++11'.</span></span><br><span class="line"><span class="string">'-std=c++11'</span>,</span><br><span class="line"><span class="comment"># ...and the same thing goes for the magic -x option which specifies the</span></span><br><span class="line"><span class="comment"># language that the files to be compiled are written in. This is mostly</span></span><br><span class="line"><span class="comment"># relevant for c++ headers.</span></span><br><span class="line"><span class="comment"># For a C project, you would set this to 'c' instead of 'c++'.</span></span><br><span class="line"><span class="string">'-x'</span>,</span><br><span class="line"><span class="string">'c++'</span>,</span><br><span class="line"><span class="string">'-I'</span>, <span class="string">'/usr/include/'</span>,	<span class="comment">#这里是stdio.h等常用C语言库文件的位置</span></span><br><span class="line"><span class="string">'-isystem'</span>, <span class="string">'/usr/lib/gcc/x86_64-pc-linux-gnu/9.1.0/include/'</span>,	<span class="comment">#gcc</span></span><br><span class="line"><span class="string">'-isystem'</span>, <span class="string">'/usr/include/c++/9.1.0/'</span>,	<span class="comment">#C++的一些常用库文件的位置</span></span><br><span class="line"><span class="string">'-isystem'</span>, <span class="string">'/usr/include/c++/9.1.0/bits'</span>,</span><br><span class="line"><span class="comment"># 可以在这里按照上面的格式继续添加，注意逗号</span></span><br><span class="line">]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># Set this to the absolute path to the folder (NOT the file!) containing the</span></span><br><span class="line"><span class="comment"># compile_commands.json file to use that instead of 'flags'. See here for</span></span><br><span class="line"><span class="comment"># more details: http://clang.llvm.org/docs/JSONCompilationDatabase.html</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Most projects will NOT need to set this to anything; you can just change the</span></span><br><span class="line"><span class="comment"># 'flags' list of compilation flags.</span></span><br><span class="line">compilation_database_folder = <span class="string">''</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> os.path.exists( compilation_database_folder ):</span><br><span class="line">  database = ycm_core.CompilationDatabase( compilation_database_folder )</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  database = <span class="literal">None</span></span><br><span class="line"> </span><br><span class="line">SOURCE_EXTENSIONS = [ <span class="string">'.cpp'</span>, <span class="string">'.cxx'</span>, <span class="string">'.cc'</span>, <span class="string">'.c'</span>, <span class="string">'.m'</span>, <span class="string">'.mm'</span> ]</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">DirectoryOfThisScript</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">return</span> os.path.dirname( os.path.abspath( __file__ ) )</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">IsHeaderFile</span><span class="params">( filename )</span>:</span></span><br><span class="line">  extension = os.path.splitext( filename )[ <span class="number">1</span> ]</span><br><span class="line">  <span class="keyword">return</span> extension <span class="keyword">in</span> [ <span class="string">'.h'</span>, <span class="string">'.hxx'</span>, <span class="string">'.hpp'</span>, <span class="string">'.hh'</span> ]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetCompilationInfoForFile</span><span class="params">( filename )</span>:</span></span><br><span class="line">  <span class="comment"># The compilation_commands.json file generated by CMake does not have entries</span></span><br><span class="line">  <span class="comment"># for header files. So we do our best by asking the db for flags for a</span></span><br><span class="line">  <span class="comment"># corresponding source file, if any. If one exists, the flags for that file</span></span><br><span class="line">  <span class="comment"># should be good enough.</span></span><br><span class="line">  <span class="keyword">if</span> IsHeaderFile( filename ):</span><br><span class="line">    basename = os.path.splitext( filename )[ <span class="number">0</span> ]</span><br><span class="line">    <span class="keyword">for</span> extension <span class="keyword">in</span> SOURCE_EXTENSIONS:</span><br><span class="line">      replacement_file = basename + extension</span><br><span class="line">      <span class="keyword">if</span> os.path.exists( replacement_file ):</span><br><span class="line">        compilation_info = database.GetCompilationInfoForFile(</span><br><span class="line">          replacement_file )</span><br><span class="line">        <span class="keyword">if</span> compilation_info.compiler_flags_:</span><br><span class="line">          <span class="keyword">return</span> compilation_info</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">  <span class="keyword">return</span> database.GetCompilationInfoForFile( filename )</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># This is the entry point; this function is called by ycmd to produce flags for</span></span><br><span class="line"><span class="comment"># a file.</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">FlagsForFile</span><span class="params">( filename, **kwargs )</span>:</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> database:</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="string">'flags'</span>: flags,</span><br><span class="line">      <span class="string">'include_paths_relative_to_dir'</span>: DirectoryOfThisScript()</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">  compilation_info = GetCompilationInfoForFile( filename )</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> compilation_info:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment"># Bear in mind that compilation_info.compiler_flags_ does NOT return a</span></span><br><span class="line">  <span class="comment"># python list, but a "list-like" StringVec object.</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="string">'flags'</span>: list( compilation_info.compiler_flags_ ),</span><br><span class="line">    <span class="string">'include_paths_relative_to_dir'</span>: compilation_info.compiler_working_dir_</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​    魔鬼插件，不论何种意义上都是魔鬼。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决依赖"><span class="toc-number">2.</span> <span class="toc-text">解决依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#download"><span class="toc-number">3.</span> <span class="toc-text">download</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compile"><span class="toc-number">4.</span> <span class="toc-text">compile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#configure"><span class="toc-number">5.</span> <span class="toc-text">configure</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/07/07/archlinux安装YCM/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&text=archlinux安装配置YCM"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&is_video=false&description=archlinux安装配置YCM"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=archlinux安装配置YCM&body=Check out this article: http://yoursite.com/2019/07/07/archlinux安装YCM/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&title=archlinux安装配置YCM"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/07/07/archlinux安装YCM/&name=archlinux安装配置YCM&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 jihandong
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
